@@ -1,0 +1,27 @@
+# robots.txt for J4 Fitnes - 2026 Modern Crawlers & Generative Engine Optimization (GEO)
+User-agent: *
+Allow: /
+
+# Dedicated AI & Search Bots
+User-agent: Googlebot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+Sitemap: https://j4fitnes.com.br/sitemap.xml

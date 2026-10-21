@@ -1,0 +1,9 @@
+node_modules/
+*.log
+.DS_Store
+openapi.json
+test_*.js
+inspect_*.js
+find_*.js
+easypanel_*.js
+deploy_*.js

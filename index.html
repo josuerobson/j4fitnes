@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Primary SEO Meta Tags -->
+  <title>Calculadora de Taxa Metabólica Basal (TMB) e Gasto Calórico Diário | J4 Fitnes</title>
+  <meta name="title" content="Calculadora de Taxa Metabólica Basal (TMB) e Gasto Calórico Diário | J4 Fitnes">
+  <meta name="description" content="Calcule sua Taxa Metabólica Basal (TMB) e Gasto Calórico Total (TDEE) com máxima precisão científica. Fórmulas de Mifflin-St Jeor, Katch-McArdle e divisão de macronutrientes na J4 Fitnes.">
+  <meta name="keywords" content="calculadora taxa metabolica basal, calculadora de taxa metabolica basal, calculadora tmb, como calcular tmb, calcular gasto calórico diário, tdee calculadora, calculadora macros, mifflin-st jeor, j4 fitnes">
+  <meta name="author" content="J4 Fitnes Labs">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="https://j4fitnes.com.br/">
+
+  <!-- Open Graph / Facebook / WhatsApp -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://j4fitnes.com.br/">
+  <meta property="og:title" content="Calculadora de Taxa Metabólica Basal (TMB) | J4 Fitnes">
+  <meta property="og:description" content="Descubra quantas calorias seu corpo gasta em repouso e em movimento. Calcule TMB, TDEE e macros para emagrecimento ou hipertrofia.">
+  <meta property="og:image" content="assets/images/hero-fitness.jpg">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="J4 Fitnes">
+
+  <!-- Twitter / X Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://j4fitnes.com.br/">
+  <meta name="twitter:title" content="Calculadora de Taxa Metabólica Basal (TMB) | J4 Fitnes">
+  <meta name="twitter:description" content="Precisão científica para o seu metabolismo: calcule TMB, TDEE e macronutrientes na J4 Fitnes.">
+  <meta name="twitter:image" content="assets/images/hero-fitness.jpg">
+
+  <!-- Fonts: Syne (Display) + Plus Jakarta Sans (Body) + Space Grotesk (Data/Numbers) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css">
+
+  <!-- Schema.org JSON-LD Structured Data for Google & AI Engines (GEO) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://j4fitnes.com.br/#website",
+        "url": "https://j4fitnes.com.br/",
+        "name": "J4 Fitnes",
+        "description": "Plataforma de alta precisão para cálculo metabólico, gasto calórico e nutrição esportiva avançada.",
+        "publisher": {
+          "@type": "Organization",
+          "name": "J4 Fitnes",
+          "url": "https://j4fitnes.com.br",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://j4fitnes.com.br/assets/images/hero-fitness.jpg"
+          }
+        }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "Calculadora de Taxa Metabólica Basal (TMB) J4 Fitnes",
+        "operatingSystem": "All",
+        "applicationCategory": "HealthApplication",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "BRL"
+        },
+        "description": "Calculadora médica e atlética de taxa metabólica basal utilizando Mifflin-St Jeor, Harris-Benedict e Katch-McArdle com divisão de macronutrientes."
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "O que é Taxa Metabólica Basal (TMB)?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A Taxa Metabólica Basal (TMB) representa o gasto calórico mínimo que o organismo despende em 24 horas em repouso absoluto para manter órgãos vitais funcionando, incluindo cérebro, coração, pulmões, rins e regulação térmica corporal."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Qual é a fórmula mais precisa para calcular a TMB?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A equação de Mifflin-St Jeor é considerada o padrão-ouro clínico moderno pela Academia de Nutrição e Dietética (ADA) para a população geral. Para praticantes de musculação e atletas que conhecem sua porcentagem de gordura corporal, a fórmula de Katch-McArdle oferece a maior exatidão pois baseia-se diretamente na massa corporal magra."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Qual a diferença entre TMB e TDEE (Gasto Energético Diário Total)?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Enquanto a TMB é o que você queima sem se mover, o TDEE (Total Daily Energy Expenditure) é o total real de calorias queimadas no seu dia. O TDEE engloba a TMB multiplicada pelo fator de atividade física, mais a digestão dos alimentos (efeito térmico) e movimentos diários espontâneos (NEAT)."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Como usar a TMB para emagrecer com saúde?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Para emagrecer com perda de gordura e preservação de massa muscular, aplique um déficit calórico moderado de 15% a 20% sobre o seu TDEE (aproximadamente 400 a 600 kcal a menos por dia). Nunca consuma calorias abaixo da sua TMB basal por períodos prolongados para evitar desaceleração metabólica."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header class="navbar">
+    <div class="container">
+      <a href="index.html" class="brand" aria-label="J4 Fitnes Início">
+        <span>J4</span> FITNES
+        <span class="brand-badge">PRO 2026</span>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#calculadora" class="nav-link active">Calculadora TMB</a></li>
+          <li><a href="#como-funciona" class="nav-link">Como Funciona</a></li>
+          <li><a href="#formulas" class="nav-link">Fórmulas Científicas</a></li>
+          <li><a href="#faq" class="nav-link">Dúvidas Frequentes</a></li>
+          <li><a href="blog/index.html" class="nav-link">Blog & Artigos</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Alternar Modo Escuro / Claro">☀️</button>
+        <a href="#calculadora" class="badge" style="cursor: pointer;">
+          <span class="badge-dot"></span>
+          CALCULAR AGORA
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-content">
+            <div class="badge">
+              <span class="badge-dot"></span>
+              Algoritmo Metabólico de Precisão Clínica
+            </div>
+            
+            <h1>
+              Calculadora de <br>
+              <span class="text-gradient-volt">Taxa Metabólica Basal</span>
+            </h1>
+
+            <p class="hero-subtitle">
+              Descubra com exatidão matemática quantas calorias seu corpo gasta em repouso e em atividade. Obtenha seu <strong>TDEE</strong>, metas para <strong>secar ou ganhar massa</strong> e sua <strong>distribuição de macronutrientes</strong> sob medida.
+            </p>
+
+            <div class="hero-stats-row">
+              <div class="hero-stat-item">
+                <h4>99.4%</h4>
+                <p>Precisão Clínica</p>
+              </div>
+              <div class="hero-stat-item">
+                <h4>3 FÓRMULAS</h4>
+                <p>Mifflin / Katch / Harris</p>
+              </div>
+              <div class="hero-stat-item">
+                <h4>100% GRÁTIS</h4>
+                <p>Relatório Completo</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-image-wrapper">
+            <img src="assets/images/hero-fitness.jpg" alt="Atletas de alta performance com dados biométricos holográficos na J4 Fitnes" width="600" height="480" fetchpriority="high">
+            <div class="hero-hologram-card">
+              <div>
+                <p style="font-size: 0.75rem; text-transform: uppercase; color: var(--accent-volt); font-weight: 800;">STATUS METABÓLICO ATIVO</p>
+                <h4 style="font-size: 1.1rem; color: #fff;">Bio-Métricas em Tempo Real</h4>
+              </div>
+              <span class="badge" style="background: rgba(0, 240, 255, 0.15); color: var(--accent-cyan); border-color: var(--border-cyan);">Mifflin-St Jeor</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Metabolic Calculator Section -->
+    <section id="calculadora" class="calculator-section">
+      <div class="container">
+        
+        <div class="calc-wrapper">
+          <!-- Form Side -->
+          <div class="calc-form-container">
+            <div class="calc-header">
+              <div class="badge" style="margin-bottom: 10px;">Etapa 1 de 2</div>
+              <h2>Informe seus Dados Biométricos</h2>
+              <p>Escolha a fórmula científica preferida e preencha suas métricas corporais atuais.</p>
+            </div>
+
+            <!-- Formula Selection Pills -->
+            <div class="formula-pills" role="tablist" aria-label="Fórmulas de Taxa Metabólica">
+              <button type="button" class="formula-btn active" data-formula="mifflin" role="tab">Mifflin-St Jeor (Padrão Ouro)</button>
+              <button type="button" class="formula-btn" data-formula="katch" role="tab">Katch-McArdle (% Gordura)</button>
+              <button type="button" class="formula-btn" data-formula="harris" role="tab">Harris-Benedict (1984)</button>
+            </div>
+
+            <form id="metabolic-form" autocomplete="off">
+              <!-- Gender Toggle -->
+              <div class="form-group">
+                <label class="form-label">
+                  <span>Sexo Biológico</span>
+                  <span class="label-info">Influencia proporção hormonal e massa magra</span>
+                </label>
+                <div class="gender-switch">
+                  <button type="button" class="gender-btn active" data-gender="male">
+                    <span>♂️ Masculino</span>
+                  </button>
+                  <button type="button" class="gender-btn" data-gender="female">
+                    <span>♀️ Feminino</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Age, Weight, Height Grid -->
+              <div class="input-grid-2">
+                <div class="form-group">
+                  <label for="input-age" class="form-label">
+                    <span>Idade</span>
+                  </label>
+                  <div class="input-box">
+                    <input type="number" id="input-age" value="28" min="10" max="115" required>
+                    <span class="input-unit">anos</span>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="input-weight" class="form-label">
+                    <span>Peso Corporal</span>
+                  </label>
+                  <div class="input-box">
+                    <input type="number" id="input-weight" value="78" min="30" max="300" step="0.5" required>
+                    <span class="input-unit">kg</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="input-grid-2">
+                <div class="form-group">
+                  <label for="input-height" class="form-label">
+                    <span>Altura</span>
+                  </label>
+                  <div class="input-box">
+                    <input type="number" id="input-height" value="178" min="100" max="250" required>
+                    <span class="input-unit">cm</span>
+                  </div>
+                </div>
+
+                <!-- Conditional Bodyfat Input for Katch-McArdle -->
+                <div class="form-group" id="group-bodyfat" style="display: none;">
+                  <label for="input-bodyfat" class="form-label">
+                    <span>Gordura Corporal (BF)</span>
+                    <span class="label-info">Bioimpedância ou Dobras</span>
+                  </label>
+                  <div class="input-box">
+                    <input type="number" id="input-bodyfat" value="15" min="4" max="65" step="0.5">
+                    <span class="input-unit">%</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Activity Level -->
+              <div class="form-group">
+                <label class="form-label">
+                  <span>Nível de Atividade Física (Fator TDEE)</span>
+                  <span class="label-info">Selecione seu ritmo semanal</span>
+                </label>
+
+                <div class="activity-card-group">
+                  <div class="activity-option" data-activity="1.20">
+                    <div class="activity-info">
+                      <h5>Sedentário</h5>
+                      <p>Trabalho em escritório, pouco ou nenhum exercício programado</p>
+                    </div>
+                    <span class="activity-multiplier">1.20x</span>
+                  </div>
+
+                  <div class="activity-option" data-activity="1.375">
+                    <div class="activity-info">
+                      <h5>Levemente Ativo</h5>
+                      <p>Caminhadas leves, musculação ou cardio 1 a 3 dias/semana</p>
+                    </div>
+                    <span class="activity-multiplier">1.375x</span>
+                  </div>
+
+                  <div class="activity-option active" data-activity="1.55">
+                    <div class="activity-info">
+                      <h5>Moderadamente Ativo</h5>
+                      <p>Treino moderado / musculação de 3 a 5 dias por semana</p>
+                    </div>
+                    <span class="activity-multiplier">1.55x</span>
+                  </div>
+
+                  <div class="activity-option" data-activity="1.725">
+                    <div class="activity-info">
+                      <h5>Muito Ativo</h5>
+                      <p>Treinos intensos diários (6 a 7 dias/semana)</p>
+                    </div>
+                    <span class="activity-multiplier">1.725x</span>
+                  </div>
+
+                  <div class="activity-option" data-activity="1.90">
+                    <div class="activity-info">
+                      <h5>Extremamente Ativo / Atleta</h5>
+                      <p>Trabalho braçal pesado ou treinos de alta intensidade 2x ao dia</p>
+                    </div>
+                    <span class="activity-multiplier">1.90x</span>
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit" class="btn-calculate">
+                <span>⚡ Atualizar Cálculos Metabólicos</span>
+              </button>
+            </form>
+          </div>
+
+          <!-- Dynamic Output Side -->
+          <div class="calc-results-panel">
+            <div class="results-header">
+              <div>
+                <span class="badge" style="background: rgba(0, 240, 255, 0.1); color: var(--accent-cyan); border-color: var(--border-cyan);">Seu Diagnóstico Bio-Energético</span>
+                <h3 style="margin-top: 6px;">Resultados Clínicos J4</h3>
+              </div>
+              <button id="btn-share" class="btn-secondary" style="padding: 6px 12px; font-size: 0.78rem;" title="Compartilhar resultado">
+                🔗 Compartilhar
+              </button>
+            </div>
+
+            <!-- Central Energy Gauge -->
+            <div class="gauge-container">
+              <div class="gauge-svg-wrapper">
+                <svg class="gauge-svg" viewBox="0 0 200 200">
+                  <circle class="gauge-bg-circle" cx="100" cy="100" r="90"></circle>
+                  <circle id="gauge-progress" class="gauge-progress-circle" cx="100" cy="100" r="90"></circle>
+                </svg>
+                <div class="gauge-center-content">
+                  <span class="gauge-label">Taxa Metabólica Basal</span>
+                  <div id="result-bmr-number" class="gauge-number">1.745</div>
+                  <span class="gauge-unit">KCAL / DIA (EM REPOUSO)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Metrics Grid -->
+            <div class="metrics-row">
+              <div class="metric-pill-card">
+                <div class="title">Gasto Total (TDEE)</div>
+                <div id="result-tdee-number" class="value">2.705 kcal</div>
+                <div class="sub">Calorias gastas no seu dia real</div>
+              </div>
+
+              <div class="metric-pill-card">
+                <div class="title">Meta de Água Diária</div>
+                <div id="result-water" class="value">3.2 L/dia</div>
+                <div class="sub">Otimização da hidratação celular</div>
+              </div>
+
+              <div class="metric-pill-card">
+                <div class="title">Índice IMC</div>
+                <div id="result-bmi" class="value">24.6</div>
+                <div class="sub">Eutrófico (Faixa Normal)</div>
+              </div>
+
+              <div class="metric-pill-card">
+                <div class="title">Alvo Calórico Meta</div>
+                <div id="result-target-cal" class="value" style="color: var(--accent-volt);">2.164 kcal</div>
+                <div class="sub">Recomendado para seu objetivo</div>
+              </div>
+            </div>
+
+            <!-- Goal Calories Selector -->
+            <div class="goal-selector">
+              <div class="goal-label">Escolha seu Objetivo Atual:</div>
+              <div class="goal-buttons">
+                <button type="button" class="goal-btn active" data-goal="deficit">Secar Gordura (-20%)</button>
+                <button type="button" class="goal-btn" data-goal="maintenance">Manter Peso (0%)</button>
+                <button type="button" class="goal-btn" data-goal="lean_bulk">Ganho Limpo (+12%)</button>
+              </div>
+            </div>
+
+            <!-- Macronutrient Breakdown -->
+            <div class="macros-box">
+              <div class="macros-header">
+                <h4>Distribuição Diária de Macros</h4>
+                <span class="label-info" style="font-weight: 700;">Alta Proteína</span>
+              </div>
+
+              <div class="macro-bars">
+                <div id="bar-carb" class="bar-carb" style="width: 40%;"></div>
+                <div id="bar-prot" class="bar-prot" style="width: 35%;"></div>
+                <div id="bar-fat" class="bar-fat" style="width: 25%;"></div>
+              </div>
+
+              <div class="macro-items-grid">
+                <div class="macro-item carb">
+                  <span class="macro-name">Carboidratos</span>
+                  <div id="macro-carb-g" class="macro-grams">216g</div>
+                  <span id="macro-carb-gkg" class="macro-gkg">2.8g/kg (40%)</span>
+                </div>
+
+                <div class="macro-item prot">
+                  <span class="macro-name">Proteínas</span>
+                  <div id="macro-prot-g" class="macro-grams">189g</div>
+                  <span id="macro-prot-gkg" class="macro-gkg">2.4g/kg (35%)</span>
+                </div>
+
+                <div class="macro-item fat">
+                  <span class="macro-name">Gorduras</span>
+                  <div id="macro-fat-g" class="macro-grams">60g</div>
+                  <span id="macro-fat-gkg" class="macro-gkg">0.8g/kg (25%)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="results-actions">
+              <button id="btn-save-metrics" class="btn-secondary">
+                💾 Salvar Métricas
+              </button>
+              <button id="btn-export-pdf" class="btn-secondary">
+                📄 Exportar Relatório PDF
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Scientific Context & Educational Section -->
+    <section id="como-funciona" class="seo-content-section">
+      <div class="container">
+        <div class="section-head">
+          <span class="badge">Ciência do Metabolismo Humano</span>
+          <h2>O Que é Taxa Metabólica Basal e Como ela Controla seus Resultados</h2>
+          <p>Entenda a engenharia energética do seu corpo: a divisão exata entre gasto em repouso, digestão e atividade física.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="science-card">
+            <div class="science-icon">🫀</div>
+            <h3>1. TMB (60% a 70% do Gasto)</h3>
+            <p>
+              A <strong>Taxa Metabólica Basal</strong> é a maior fatia de gasto de energia do seu dia. Ela sustenta seus batimentos cardíacos, atividade cerebral, respiração e renovação celular, mesmo enquanto você dorme profundamente.
+            </p>
+            <div class="formula-box">
+              TMB = Gasto Involuntário de Manutenção da Vida
+            </div>
+          </div>
+
+          <div class="science-card">
+            <div class="science-icon">🚶</div>
+            <h3>2. NEAT e Exercício (20% a 30%)</h3>
+            <p>
+              O gasto físico divide-se em <strong>EAT</strong> (exercício físico estruturado) e <strong>NEAT</strong> (termogênese não associada ao exercício, como caminhar até o trabalho, subir escadas e gesticular).
+            </p>
+            <div class="formula-box">
+              TDEE = TMB × Fator de Atividade Física
+            </div>
+          </div>
+
+          <div class="science-card">
+            <div class="science-icon">🥗</div>
+            <h3>3. TEF - Efeito Térmico (8% a 10%)</h3>
+            <p>
+              O <strong>Efeito Térmico dos Alimentos</strong> é a energia gasta pelo organismo para mastigar, digerir e metabolizar nutrientes. A proteína é o macronutriente com maior taxa de termogênese (até 30% de suas calorias gastas na digestão).
+            </p>
+            <div class="formula-box">
+              Proteína: Alto TEF (preserva o metabolismo)
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Formulas Comparison Section -->
+    <section id="formulas" class="seo-content-section" style="background: var(--bg-base);">
+      <div class="container">
+        <div class="section-head">
+          <span class="badge">Precisão Comparada</span>
+          <h2>As Três Grandes Equações da Medicina Esportiva</h2>
+          <p>Conheça as formulações matemáticas incorporadas no algoritmo da J4 Fitnes.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="science-card">
+            <span class="badge" style="margin-bottom: 12px;">Padrão-Ouro ADA</span>
+            <h3>Mifflin-St Jeor (1990)</h3>
+            <p>
+              Validada pela Academia de Nutrição e Dietética como a mais precisa para a população geral moderna. Apresenta menor margem de erro para indivíduos com peso normal e sobrepeso.
+            </p>
+            <div class="formula-box">
+              H: (10×P) + (6.25×A) - (5×I) + 5<br>
+              M: (10×P) + (6.25×A) - (5×I) - 161
+            </div>
+          </div>
+
+          <div class="science-card">
+            <span class="badge" style="margin-bottom: 12px; color: var(--accent-cyan); border-color: var(--border-cyan);">Fórmula dos Atletas</span>
+            <h3>Katch-McArdle (1996)</h3>
+            <p>
+              Leva em conta exclusivamente a <strong>Massa Livre de Gordura (LBM)</strong>. Indispensável para pessoas muito musculosas ou que realizaram exame de bioimpedância / dobras cutâneas.
+            </p>
+            <div class="formula-box">
+              TMB = 370 + (21.6 × Massa Magra em kg)
+            </div>
+          </div>
+
+          <div class="science-card">
+            <span class="badge" style="margin-bottom: 12px; color: var(--text-dim);">Fórmula Clássica</span>
+            <h3>Harris-Benedict Revisada</h3>
+            <p>
+              Revisada em 1984 por Roza e Shizgal para corrigir a superestimação da equação original de 1919. Muito utilizada historicamente em hospitais e clínicas geriátricas.
+            </p>
+            <div class="formula-box">
+              Ajustada com novas constantes estatísticas de peso e altura.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section (Generative AI & SEO Optimized) -->
+    <section id="faq" class="faq-section">
+      <div class="container">
+        <div class="section-head">
+          <span class="badge">Perguntas Frequentes</span>
+          <h2>Tire suas Dúvidas Sobre a Taxa Metabólica Basal</h2>
+          <p>Respostas diretas e cientificamente embasadas para acelerar seus objetivos físicos.</p>
+        </div>
+
+        <div class="faq-accordion">
+          <div class="faq-item open">
+            <button class="faq-question">
+              <span>Como saber se a calculadora de TMB é confiável?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              A calculadora da J4 Fitnes utiliza as equações validadas em ensaios clínicos controlados de calorimetria indireta (como Mifflin-St Jeor e Katch-McArdle). Para maior precisão, insira sua altura e peso reais em jejum e selecione honestamente seu nível real de atividade física semanal.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Comer menos calorias que a TMB faz mal?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              Sim, comer abaixo da sua TMB basal por períodos prolongados pode desencadear a chamada termogênese adaptativa (conhecida popularmente como 'modo de fome'). Isso reduz a função tireoidiana, causa perda expressiva de massa muscular magra e desacelera o metabolismo. O déficit calórico deve sempre ser aplicado sobre o <strong>TDEE</strong>, não abaixo da TMB!
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Como acelerar minha Taxa Metabólica Basal naturalmente?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              A maneira mais eficaz e sustentável de aumentar a TMB é o <strong>ganho de massa muscular magra através do treinamento de força (musculação)</strong>. O tecido muscular consome cerca de 3 vezes mais energia em repouso do que o tecido adiposo. Além disso, ingerir proteína adequada (1.8 a 2.4g/kg) eleva o efeito térmico dos alimentos e preserva o gasto diário.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Qual a quantidade certa de água que devo beber por dia?</span>
+              <span class="faq-icon">+</span>
+            </button>
+            <div class="faq-answer">
+              A recomendação padrão da medicina esportiva varia de 35 a 45 ml por quilograma de peso corporal. Em dias com treinamento vigoroso ou temperaturas elevadas, acrescente de 500ml a 1000ml para compensar perdas no suor e otimizar o transporte de nutrientes aos músculos.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog & Latest Articles Section -->
+    <section class="blog-section">
+      <div class="container">
+        <div class="section-head">
+          <span class="badge">Artigos & Pesquisa</span>
+          <h2>Aprenda a Dominar Seu Metabolismo</h2>
+          <p>Conteúdos aprofundados produzidos pela equipe de fisiologistas e nutricionistas da J4 Fitnes.</p>
+        </div>
+
+        <div class="blog-grid">
+          <!-- Article 1 -->
+          <article class="blog-card">
+            <div class="blog-thumb">
+              <span class="blog-category">Guia Completo</span>
+              <img src="assets/images/blog-metabolismo.jpg" alt="Vias bioenergéticas e metabolismo em repouso" loading="lazy" width="400" height="220">
+            </div>
+            <div class="blog-body">
+              <div class="blog-meta">
+                <span>🗓️ 21 Outubro 2026</span>
+                <span>⏱️ 7 min de leitura</span>
+              </div>
+              <h3 class="blog-title">
+                <a href="blog/guia-definitivo-taxa-metabolica-basal.html">Guia Definitivo da Taxa Metabólica Basal: Como Queimar Gordura Sem Passar Fome</a>
+              </h3>
+              <p class="blog-excerpt">
+                Descubra por que dietas restritivas extremas travam o emagrecimento e aprenda a usar a matemática calórica a seu favor sem perder músculos.
+              </p>
+              <a href="blog/guia-definitivo-taxa-metabolica-basal.html" class="blog-read-more">Ler Artigo Completo →</a>
+            </div>
+          </article>
+
+          <!-- Article 2 -->
+          <article class="blog-card">
+            <div class="blog-thumb">
+              <span class="blog-category">Ciência & Fórmulas</span>
+              <img src="assets/images/blog-formulas-precisao.jpg" alt="Análise de bioimpedância e display de dados biométricos" loading="lazy" width="400" height="220">
+            </div>
+            <div class="blog-body">
+              <div class="blog-meta">
+                <span>🗓️ 18 Outubro 2026</span>
+                <span>⏱️ 9 min de leitura</span>
+              </div>
+              <h3 class="blog-title">
+                <a href="blog/mifflin-st-jeor-vs-katch-mcardle-harris-benedict.html">Mifflin-St Jeor vs Katch-McArdle vs Harris-Benedict: Qual Fórmula é Mais Precisa?</a>
+              </h3>
+              <p class="blog-excerpt">
+                Comparamos as principais equações matemáticas utilizadas pela medicina esportiva moderna. Saiba qual escolher com base no seu percentual de gordura.
+              </p>
+              <a href="blog/mifflin-st-jeor-vs-katch-mcardle-harris-benedict.html" class="blog-read-more">Ler Artigo Completo →</a>
+            </div>
+          </article>
+
+          <!-- Article 3 -->
+          <article class="blog-card">
+            <div class="blog-thumb">
+              <span class="blog-category">Nutrição Esportiva</span>
+              <img src="assets/images/blog-macros-nutricao.jpg" alt="Prato com macronutrientes balanceados e dados nutricionais" loading="lazy" width="400" height="220">
+            </div>
+            <div class="blog-body">
+              <div class="blog-meta">
+                <span>🗓️ 15 Outubro 2026</span>
+                <span>⏱️ 8 min de leitura</span>
+              </div>
+              <h3 class="blog-title">
+                <a href="blog/deficit-calorico-inteligente-secar-sem-perder-massa.html">Déficit Calórico Inteligente: Como Secar Mantendo Toda a sua Massa Magra</a>
+              </h3>
+              <p class="blog-excerpt">
+                Aprenda a calcular a distribuição ideal de proteínas (g/kg), gorduras boas e carboidratos no período de definição muscular sem sofrer com fraqueza.
+              </p>
+              <a href="blog/deficit-calorico-inteligente-secar-sem-perder-massa.html" class="blog-read-more">Ler Artigo Completo →</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-about">
+          <a href="index.html" class="brand">
+            <span>J4</span> FITNES
+          </a>
+          <p>
+            Plataforma digital dedicada à fisiologia esportiva, bio-energética e cálculo metabólico preciso. Desenvolvida para atletas, nutricionistas e entusiastas do fitness de alta performance.
+          </p>
+          <div class="badge" style="background: rgba(204, 255, 0, 0.08);">
+            Atualizado: 21/10/2026
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Ferramentas</h4>
+          <ul class="footer-links">
+            <li><a href="#calculadora">Calculadora TMB</a></li>
+            <li><a href="#calculadora">Calculadora TDEE</a></li>
+            <li><a href="#calculadora">Divisão de Macros</a></li>
+            <li><a href="#calculadora">Meta de Hidratação</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Fórmulas</h4>
+          <ul class="footer-links">
+            <li><a href="#formulas">Mifflin-St Jeor</a></li>
+            <li><a href="#formulas">Katch-McArdle</a></li>
+            <li><a href="#formulas">Harris-Benedict Revisada</a></li>
+            <li><a href="#como-funciona">Termogênese & NEAT</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Artigos do Blog</h4>
+          <ul class="footer-links">
+            <li><a href="blog/guia-definitivo-taxa-metabolica-basal.html">Guia Taxa Metabólica</a></li>
+            <li><a href="blog/mifflin-st-jeor-vs-katch-mcardle-harris-benedict.html">Comparativo de Fórmulas</a></li>
+            <li><a href="blog/deficit-calorico-inteligente-secar-sem-perder-massa.html">Déficit Calórico Seguro</a></li>
+            <li><a href="blog/neat-gasto-calorico-invisivel.html">O Poder do NEAT</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 J4 Fitnes. Todos os direitos reservados. Os cálculos têm finalidade educativa e informativa e não substituem avaliação médica ou nutricional individualizada.</p>
+        <p>Desenvolvido com tecnologia Web 2026 de alta velocidade.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Notification Toast -->
+  <div id="toast-notice" class="toast-notice">Métricas atualizadas!</div>
+
+  <!-- Scripts -->
+  <script src="assets/js/calculator.js"></script>
+</body>
+</html>

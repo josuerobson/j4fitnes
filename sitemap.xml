@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://j4fitnes.com.br/</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://j4fitnes.com.br/assets/images/hero-fitness.jpg</image:loc>
+      <image:title>Calculadora de Taxa Metabólica Basal J4 Fitnes</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://j4fitnes.com.br/blog/</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://j4fitnes.com.br/blog/guia-definitivo-taxa-metabolica-basal.html</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://j4fitnes.com.br/assets/images/blog-metabolismo.jpg</image:loc>
+      <image:title>Vias Bioenergéticas da Taxa Metabólica Basal</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://j4fitnes.com.br/blog/mifflin-st-jeor-vs-katch-mcardle-harris-benedict.html</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://j4fitnes.com.br/assets/images/blog-formulas-precisao.jpg</image:loc>
+      <image:title>Comparativo de Fórmulas Metabólicas Mifflin-St Jeor e Katch-McArdle</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://j4fitnes.com.br/blog/deficit-calorico-inteligente-secar-sem-perder-massa.html</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+    <image:image>
+      <image:loc>https://j4fitnes.com.br/assets/images/blog-macros-nutricao.jpg</image:loc>
+      <image:title>Nutrição de Precisão e Macronutrientes</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://j4fitnes.com.br/blog/neat-gasto-calorico-invisivel.html</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://j4fitnes.com.br/assets/images/hero-fitness.jpg</image:loc>
+      <image:title>NEAT e Gasto Calórico Diário</image:title>
+    </image:image>
+  </url>
+</urlset>
