@@ -566,58 +566,444 @@
     `;
   }
 
+  // Dicionário canônico para consolidação inteligente de compras no mercado
+  function mapFoodToGroceryItem(rawName) {
+    const n = rawName.toLowerCase();
+
+    // 1. AÇOUGUE & PEIXARIA
+    if (n.includes('frango') || n.includes('sassami')) {
+      return {
+        key: 'frango',
+        category: '🥩 Açougue & Peixaria',
+        name: 'Peito de frango (filé ou sassami)',
+        unitType: 'meat_grams',
+        weightRawEst: 180
+      };
+    }
+    if (n.includes('patinho') || n.includes('carne bovina') || n.includes('alcatra')) {
+      return {
+        key: 'carne_bovina',
+        category: '🥩 Açougue & Peixaria',
+        name: 'Carne bovina magra (Patinho moído ou Alcatra)',
+        unitType: 'meat_grams',
+        weightRawEst: 180
+      };
+    }
+    if (n.includes('tilápia') || n.includes('peixe') || n.includes('atum')) {
+      return {
+        key: 'peixe_tilapia',
+        category: '🥩 Açougue & Peixaria',
+        name: 'Filé de tilápia fresca ou atum sólido',
+        unitType: 'meat_grams',
+        weightRawEst: 170
+      };
+    }
+
+    // 2. HORTIFRUTI & FEIRA
+    if (n.includes('ovo') || n.includes('omelete')) {
+      const eggsCount = n.includes('3 ovos') ? 3 : (n.includes('1 ovo') ? 1 : 2);
+      return {
+        key: 'ovos',
+        category: '🥬 Hortifruti & Feira',
+        name: 'Ovos de galinha (brancos ou caipiras)',
+        unitType: 'eggs',
+        unitsEst: eggsCount
+      };
+    }
+    if (n.includes('banana')) {
+      return {
+        key: 'banana',
+        category: '🥬 Hortifruti & Feira',
+        name: 'Banana prata fresca',
+        unitType: 'bananas',
+        unitsEst: 1
+      };
+    }
+    if (n.includes('mamão') || n.includes('mamao')) {
+      return {
+        key: 'mamao',
+        category: '🥬 Hortifruti & Feira',
+        name: 'Mamão papaia',
+        unitType: 'fixed_purchase',
+        fixedText: '1 a 2 unidades médias'
+      };
+    }
+    if (n.includes('maçã') || n.includes('maca') || n.includes('pêra') || n.includes('pera')) {
+      return {
+        key: 'maca',
+        category: '🥬 Hortifruti & Feira',
+        name: 'Maçã nacional higienizada',
+        unitType: 'apples',
+        unitsEst: 1
+      };
+    }
+    if (n.includes('batata-doce') || n.includes('batata doce')) {
+      return {
+        key: 'batata_doce',
+        category: '🥬 Hortifruti & Feira',
+        name: 'Batata-doce roxa ou branca',
+        unitType: 'fixed_weight',
+        gramsPerMeal: 160
+      };
+    }
+    if (n.includes('batata inglesa') || n.includes('batata-inglesa') || n.includes('purê')) {
+      return {
+        key: 'batata_inglesa',
+        category: '🥬 Hortifruti & Feira',
+        name: 'Batata inglesa para cozinhar',
+        unitType: 'fixed_weight',
+        gramsPerMeal: 160
+      };
+    }
+    if (n.includes('mandioca') || n.includes('aipim')) {
+      return {
+        key: 'mandioca',
+        category: '🥬 Hortifruti & Feira',
+        name: 'Mandioca (aipim) fresca ou descascada',
+        unitType: 'fixed_weight',
+        gramsPerMeal: 160
+      };
+    }
+    if (n.includes('salada') || n.includes('alface') || n.includes('rúcula') || n.includes('folhas')) {
+      return {
+        key: 'folhas_verdes',
+        category: '🥬 Hortifruti & Feira',
+        name: 'Folhas verdes (Alface, Rúcula ou Espinafre)',
+        unitType: 'fixed_purchase',
+        fixedText: '2 a 3 maços frescos'
+      };
+    }
+    if (n.includes('legumes') || n.includes('cenoura') || n.includes('brócolis') || n.includes('abobrinha')) {
+      return {
+        key: 'mix_legumes',
+        category: '🥬 Hortifruti & Feira',
+        name: 'Mix de legumes (Cenoura, Abobrinha, Brócolis, Tomate)',
+        unitType: 'fixed_purchase',
+        fixedText: '~1 kg variado para cozinhar'
+      };
+    }
+    if (n.includes('morango')) {
+      return {
+        key: 'morango',
+        category: '🥬 Hortifruti & Feira',
+        name: 'Morangos frescos',
+        unitType: 'fixed_purchase',
+        fixedText: '1 caixa (250g)'
+      };
+    }
+    if (n.includes('abacate')) {
+      return {
+        key: 'abacate',
+        category: '🥬 Hortifruti & Feira',
+        name: 'Abacate maduro',
+        unitType: 'fixed_purchase',
+        fixedText: '1 a 2 unidades'
+      };
+    }
+
+    // 3. MERCEARIA & GRÃOS
+    if (n.includes('arroz')) {
+      return {
+        key: 'arroz',
+        category: '🍚 Mercearia & Grãos',
+        name: 'Arroz (branco ou integral)',
+        unitType: 'fixed_purchase',
+        fixedText: '1 pacote (1 kg)'
+      };
+    }
+    if (n.includes('feijão') || n.includes('feijao')) {
+      return {
+        key: 'feijao',
+        category: '🍚 Mercearia & Grãos',
+        name: 'Feijão (carioca ou preto)',
+        unitType: 'fixed_purchase',
+        fixedText: '1 pacote (1 kg)'
+      };
+    }
+    if (n.includes('grão-de-bico') || n.includes('grao de bico')) {
+      return {
+        key: 'grao_bico',
+        category: '🍚 Mercearia & Grãos',
+        name: 'Grão-de-bico seco ou em conserva',
+        unitType: 'fixed_purchase',
+        fixedText: '1 pacote (500g)'
+      };
+    }
+    if (n.includes('aveia')) {
+      return {
+        key: 'aveia',
+        category: '🍚 Mercearia & Grãos',
+        name: 'Aveia em flocos finos',
+        unitType: 'fixed_purchase',
+        fixedText: '1 caixa (250g a 500g)'
+      };
+    }
+    if (n.includes('tapioca') || n.includes('crepioca')) {
+      return {
+        key: 'tapioca',
+        category: '🍚 Mercearia & Grãos',
+        name: 'Goma de tapioca hidratada',
+        unitType: 'fixed_purchase',
+        fixedText: '1 pacote (500g)'
+      };
+    }
+    if (n.includes('cuscuz') || n.includes('milho')) {
+      return {
+        key: 'cuscuz',
+        category: '🍚 Mercearia & Grãos',
+        name: 'Flocão de milho para cuscuz',
+        unitType: 'fixed_purchase',
+        fixedText: '1 pacote (500g)'
+      };
+    }
+    if (n.includes('azeite')) {
+      return {
+        key: 'azeite',
+        category: '🍚 Mercearia & Grãos',
+        name: 'Azeite de oliva extra virgem',
+        unitType: 'fixed_purchase',
+        fixedText: '1 garrafa (500ml)'
+      };
+    }
+    if (n.includes('café') || n.includes('cafe')) {
+      return {
+        key: 'cafe_po',
+        category: '🍚 Mercearia & Grãos',
+        name: 'Café em pó tradicional',
+        unitType: 'fixed_purchase',
+        fixedText: '1 pacote (500g)'
+      };
+    }
+    if (n.includes('chá') || n.includes('cha') || n.includes('camomila')) {
+      return {
+        key: 'cha_camomila',
+        category: '🍚 Mercearia & Grãos',
+        name: 'Chá de camomila ou erva-cidreira em sachê',
+        unitType: 'fixed_purchase',
+        fixedText: '1 caixinha (10 a 15 sachês)'
+      };
+    }
+
+    // 4. PADARIA
+    if (n.includes('pão francês') || n.includes('pao frances')) {
+      return {
+        key: 'pao_frances',
+        category: '🥖 Padaria',
+        name: 'Pão francês fresquinho',
+        unitType: 'bread_french',
+        unitsEst: 2
+      };
+    }
+    if (n.includes('pão') || n.includes('pao') || n.includes('integral') || n.includes('sanduíche') || n.includes('sanduiche')) {
+      return {
+        key: 'pao_integral',
+        category: '🥖 Padaria',
+        name: 'Pão de forma 100% integral',
+        unitType: 'fixed_purchase',
+        fixedText: '1 pacote fatiado (400g a 500g)'
+      };
+    }
+
+    // 5. LATICÍNIOS & FRIOS
+    if (n.includes('queijo') || n.includes('ricota')) {
+      return {
+        key: 'queijo_minas',
+        category: '🧀 Laticínios & Frios',
+        name: 'Queijo minas frescal, ricota ou cottage',
+        unitType: 'fixed_purchase',
+        fixedText: '1 peça (~300g a 500g)'
+      };
+    }
+    if (n.includes('iogurte')) {
+      return {
+        key: 'iogurte',
+        category: '🧀 Laticínios & Frios',
+        name: 'Iogurte natural desnatado sem açúcar',
+        unitType: 'yogurt_pots',
+        unitsEst: 1
+      };
+    }
+    if (n.includes('leite')) {
+      return {
+        key: 'leite',
+        category: '🧀 Laticínios & Frios',
+        name: 'Leite desnatado ou semidesnatado',
+        unitType: 'fixed_purchase',
+        fixedText: '1 a 2 litros'
+      };
+    }
+
+    // 6. EMPÓRIO & SUPLEMENTOS
+    if (n.includes('castanha') || n.includes('nozes')) {
+      return {
+        key: 'castanhas',
+        category: '🥜 Empório & Suplementos',
+        name: 'Castanha-do-Pará ou nozes',
+        unitType: 'fixed_purchase',
+        fixedText: '1 pacote pequeno (~100g a 150g)'
+      };
+    }
+    if (n.includes('amendoim') || n.includes('pasta de amendoim')) {
+      return {
+        key: 'pasta_amendoim',
+        category: '🥜 Empório & Suplementos',
+        name: 'Pasta de amendoim integral 100% pura',
+        unitType: 'fixed_purchase',
+        fixedText: '1 pote (450g a 500g)'
+      };
+    }
+    if (n.includes('whey')) {
+      return {
+        key: 'whey_protein',
+        category: '🥜 Empório & Suplementos',
+        name: 'Whey Protein (concentrado ou isolado)',
+        unitType: 'fixed_purchase',
+        fixedText: '1 pote ou refil (900g)'
+      };
+    }
+
+    // Fallback genérico
+    return {
+      key: 'misc_' + rawName.slice(0, 15).replace(/\s+/g, '_'),
+      category: '🛒 Mercearia Geral',
+      name: rawName,
+      unitType: 'fixed_purchase',
+      fixedText: '1 unidade/porção'
+    };
+  }
+
   function generateGroceryList() {
     if (!menuState.weeklyPlan) return;
 
-    const consolidated = {};
+    // Mapa de itens canônicos consolidados
+    const groceryMap = {};
 
     Object.keys(menuState.weeklyPlan).forEach(dayKey => {
       const day = menuState.weeklyPlan[dayKey];
       day.meals.forEach(meal => {
         meal.foods.forEach(food => {
-          const cleanName = food.name.replace(/^[^:]+:\s*/, '');
-          if (!consolidated[cleanName]) {
-            consolidated[cleanName] = { count: 0, samplePortion: food.portion };
+          const mapping = mapFoodToGroceryItem(food.name);
+          if (!groceryMap[mapping.key]) {
+            groceryMap[mapping.key] = {
+              name: mapping.name,
+              category: mapping.category,
+              unitType: mapping.unitType,
+              fixedText: mapping.fixedText || '',
+              totalWeight: 0,
+              totalUnits: 0,
+              occurrences: 0
+            };
           }
-          consolidated[cleanName].count += 1;
+
+          groceryMap[mapping.key].occurrences += 1;
+
+          if (mapping.unitType === 'meat_grams') {
+            groceryMap[mapping.key].totalWeight += (mapping.weightRawEst || 180);
+          } else if (mapping.unitType === 'fixed_weight') {
+            groceryMap[mapping.key].totalWeight += (mapping.gramsPerMeal || 150);
+          } else if (mapping.unitType === 'eggs' || mapping.unitType === 'bananas' || mapping.unitType === 'apples' || mapping.unitType === 'bread_french' || mapping.unitType === 'yogurt_pots') {
+            groceryMap[mapping.key].totalUnits += (mapping.unitsEst || 1);
+          }
         });
       });
     });
+
+    // Calcula texto de quantidade exata e realista de compra
+    const consolidatedList = Object.keys(groceryMap).map(key => {
+      const it = groceryMap[key];
+      let quantityText = '';
+
+      if (it.unitType === 'meat_grams') {
+        const kg = Math.ceil(it.totalWeight / 250) * 0.25; // arredonda de 250g em 250g
+        quantityText = `~${kg.toFixed(1).replace('.', ',')} kg (para a semana toda)`;
+      } else if (it.unitType === 'fixed_weight') {
+        const kg = Math.max(0.5, Math.ceil(it.totalWeight / 500) * 0.5);
+        quantityText = `~${kg.toFixed(1).replace('.', ',')} kg`;
+      } else if (it.unitType === 'eggs') {
+        const cartelas = it.totalUnits > 20 ? '1 cartela de 30 ovos' : (it.totalUnits > 12 ? '1 cartela de 20 ovos' : '1 dúzia (12 ovos)');
+        quantityText = `${it.totalUnits} ovos (${cartelas})`;
+      } else if (it.unitType === 'bananas') {
+        quantityText = `${it.totalUnits} unidades (1 cacho com ~${Math.max(6, it.totalUnits)} bananas)`;
+      } else if (it.unitType === 'apples') {
+        quantityText = `${it.totalUnits} a ${it.totalUnits + 2} unidades`;
+      } else if (it.unitType === 'bread_french') {
+        quantityText = `${it.totalUnits} a ${it.totalUnits + 2} pães franceses frescos`;
+      } else if (it.unitType === 'yogurt_pots') {
+        quantityText = `${it.totalUnits} potes individuais (160g cada)`;
+      } else if (it.fixedText) {
+        quantityText = it.fixedText;
+      } else {
+        quantityText = `${it.occurrences}x porções na semana`;
+      }
+
+      return {
+        key,
+        name: it.name,
+        category: it.category,
+        quantity: quantityText,
+        occurrences: it.occurrences
+      };
+    });
+
+    // Agrupa por Categorias de Supermercado
+    const categories = [
+      '🥩 Açougue & Peixaria',
+      '🥬 Hortifruti & Feira',
+      '🍚 Mercearia & Grãos',
+      '🧀 Laticínios & Frios',
+      '🥖 Padaria',
+      '🥜 Empório & Suplementos',
+      '🛒 Mercearia Geral'
+    ];
 
     const modal = document.getElementById('grocery-modal');
     const listBody = document.getElementById('grocery-list-body');
     if (!modal || !listBody) return;
 
-    const itemsList = Object.keys(consolidated);
-    const totalItems = itemsList.length;
+    const totalItems = consolidatedList.length;
 
-    listBody.innerHTML = `
-      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border-card);">
+    let html = `
+      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; padding-bottom: 14px; border-bottom: 1px solid var(--border-card);">
         <div style="display: flex; gap: 8px; align-items: center;">
-          <button type="button" id="btn-toggle-all-grocery" class="btn-select-all" style="padding: 6px 14px; font-weight: 700;">
+          <button type="button" id="btn-toggle-all-grocery" class="btn-select-all" style="padding: 7px 16px; font-weight: 700; font-size: 0.82rem;">
             ✓ Marcar Todos
           </button>
-          <button type="button" id="btn-copy-grocery" class="btn-select-all" style="background: var(--bg-subtle); color: var(--text-body); border-color: var(--border-card);">
+          <button type="button" id="btn-copy-grocery" class="btn-select-all" style="background: var(--bg-subtle); color: var(--text-body); border-color: var(--border-card); font-size: 0.82rem;">
             📋 Copiar Lista (WhatsApp)
           </button>
         </div>
-        <span id="grocery-counter" style="font-size: 0.82rem; font-weight: 600; color: var(--text-muted);">
+        <span id="grocery-counter" style="font-size: 0.84rem; font-weight: 700; color: var(--primary);">
           0 de ${totalItems} itens no carrinho
         </span>
       </div>
-
-      <div class="grocery-grid-items">
-        ${itemsList.map(item => `
-          <div class="grocery-item-card" id="card-${item.replace(/[^a-zA-Z0-9]/g, '_')}">
-            <input type="checkbox" class="grocery-chk" id="item-${item.replace(/[^a-zA-Z0-9]/g, '_')}">
-            <label for="item-${item.replace(/[^a-zA-Z0-9]/g, '_')}">
-              <strong>${item}</strong>
-              <span>Presente em ${consolidated[item].count} refeições na semana</span>
-            </label>
-          </div>
-        `).join('')}
-      </div>
     `;
+
+    categories.forEach(cat => {
+      const itemsInCat = consolidatedList.filter(i => i.category === cat);
+      if (itemsInCat.length === 0) return;
+
+      html += `
+        <div style="margin-bottom: 22px;">
+          <h4 style="font-size: 0.95rem; font-weight: 800; color: var(--text-main); margin-bottom: 10px; padding-left: 2px;">
+            ${cat}
+          </h4>
+          <div class="grocery-grid-items">
+            ${itemsInCat.map(item => `
+              <div class="grocery-item-card" id="card-${item.key}">
+                <input type="checkbox" class="grocery-chk" id="item-${item.key}">
+                <label for="item-${item.key}">
+                  <strong>${item.name}</strong>
+                  <span style="color: var(--primary); font-weight: 700; font-size: 0.8rem; margin-top: 2px;">Comprar: ${item.quantity}</span>
+                  <span style="font-size: 0.72rem; color: var(--text-muted);">Consumo em ${item.occurrences} refeições da semana</span>
+                </label>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    });
+
+    listBody.innerHTML = html;
 
     // Lógica de Marcar / Desmarcar Todos
     const btnToggleAll = document.getElementById('btn-toggle-all-grocery');
@@ -648,7 +1034,7 @@
       chk.addEventListener('change', () => {
         const parentCard = chk.closest('.grocery-item-card');
         if (chk.checked) {
-          parentCard.style.opacity = '0.6';
+          parentCard.style.opacity = '0.55';
           parentCard.querySelector('strong').style.textDecoration = 'line-through';
         } else {
           parentCard.style.opacity = '1';
@@ -667,7 +1053,7 @@
           chk.checked = markAll;
           const parentCard = chk.closest('.grocery-item-card');
           if (markAll) {
-            parentCard.style.opacity = '0.6';
+            parentCard.style.opacity = '0.55';
             parentCard.querySelector('strong').style.textDecoration = 'line-through';
           } else {
             parentCard.style.opacity = '1';
@@ -678,19 +1064,31 @@
       });
     }
 
-    // Copiar para WhatsApp
+    // Copiar para WhatsApp formatado por categoria e com quantidades exatas
     const btnCopy = document.getElementById('btn-copy-grocery');
     if (btnCopy) {
       btnCopy.addEventListener('click', () => {
-        const lines = ['🛒 *LISTA DE COMPRAS SEMANAL - J4 FITNESS* \n'];
-        itemsList.forEach(item => {
-          lines.push(`• ${item} (${consolidated[item].count}x na semana)`);
+        const lines = [
+          '🛒 *LISTA DE COMPRAS SEMANAL - J4 FITNESS*',
+          'Quantidades calculadas para cobrir seu plano alimentar de Segunda a Domingo:\n'
+        ];
+
+        categories.forEach(cat => {
+          const itemsInCat = consolidatedList.filter(i => i.category === cat);
+          if (itemsInCat.length === 0) return;
+
+          lines.push(`*${cat.toUpperCase()}*`);
+          itemsInCat.forEach(it => {
+            lines.push(`• *${it.name}* ➔ Comprar: _${it.quantity}_`);
+          });
+          lines.push('');
         });
-        lines.push('\n_Gerado por J4 Fitness: https://j4fitnes.5450wp.easypanel.host/cardapio.html_');
+
+        lines.push('_Gerado por J4 Fitness: https://j4fitnes.5450wp.easypanel.host/cardapio.html_');
 
         const text = lines.join('\n');
         navigator.clipboard.writeText(text).then(() => {
-          alert('Lista de compras copiada! Você pode colar diretamente no WhatsApp.');
+          alert('Lista de compras detalhada copiada! Você pode colar diretamente no WhatsApp.');
         }).catch(() => {
           prompt('Copie a lista abaixo:', text);
         });
