@@ -1,120 +1,90 @@
 <!DOCTYPE html>
-<html lang="pt-BR" data-theme="dark">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Guia Definitivo da Taxa Metabólica Basal (TMB): Como Queimar Gordura Sem Passar Fome | J4 Fitnes</title>
+  <title>Guia Definitivo da Taxa Metabólica Basal (TMB): Como Queimar Gordura Sem Passar Fome | J4 Fitness</title>
   <meta name="description" content="Aprenda o que é Taxa Metabólica Basal (TMB), como calcular seu gasto calórico em repouso e estratégias para acelerar a queima de gordura sem destruir sua massa magra.">
-  <meta name="keywords" content="o que e taxa metabolica basal, tmb como calcular, emagrecer com tmb, calculo caloria repouso, j4 fitnes">
-  <link rel="canonical" href="https://j4fitnes.com.br/blog/guia-definitivo-taxa-metabolica-basal.html">
+  <link rel="canonical" href="https://j4fitnes.5450wp.easypanel.host/blog/guia-definitivo-taxa-metabolica-basal.html">
 
-  <!-- Open Graph -->
   <meta property="og:type" content="article">
-  <meta property="og:title" content="Guia Definitivo da Taxa Metabólica Basal (TMB) | J4 Fitnes">
-  <meta property="og:description" content="Descubra a ciência da queima calórica basal e evite o efeito rebote nas dietas.">
+  <meta property="og:title" content="Guia Definitivo da Taxa Metabólica Basal (TMB) | J4 Fitness">
+  <meta property="og:description" content="Descubra a ciência da queima calórica basal e evite o efeito sanfona nas dietas.">
   <meta property="og:image" content="../assets/images/blog-metabolismo.jpg">
 
-  <!-- Fonts -->
+  <!-- Fonts: Plus Jakarta Sans + Space Grotesk -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&family=Syne:wght@700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="../assets/css/style.css">
 
-  <!-- Schema.org Article Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "Guia Definitivo da Taxa Metabólica Basal (TMB): Como Queimar Gordura Sem Passar Fome",
-    "image": "https://j4fitnes.com.br/assets/images/blog-metabolismo.jpg",
-    "author": {
-      "@type": "Organization",
-      "name": "J4 Fitnes Labs"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "J4 Fitnes",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://j4fitnes.com.br/assets/images/hero-fitness.jpg"
-      }
-    },
-    "datePublished": "2026-10-21",
-    "dateModified": "2026-10-21",
-    "description": "Um guia completo sobre fisiologia da Taxa Metabólica Basal e aplicação prática no emagrecimento."
-  }
-  </script>
   <style>
-    .article-container {
-      max-width: 820px;
+    .article-wrap {
+      max-width: 760px;
       margin: 0 auto;
-      padding: 130px 24px 80px;
+      padding: 100px 20px 60px;
     }
     .article-header {
-      margin-bottom: 36px;
+      margin-bottom: 28px;
     }
     .article-header h1 {
-      font-size: clamp(2.2rem, 4vw, 3.2rem);
-      margin: 16px 0;
-      line-height: 1.15;
+      font-size: 2.1rem;
+      margin: 14px 0 10px;
+      line-height: 1.25;
     }
     .article-hero-img {
       width: 100%;
-      height: 440px;
+      height: 380px;
       object-fit: cover;
       border-radius: var(--radius-lg);
-      border: 1px solid var(--border-subtle);
-      margin-bottom: 40px;
+      border: 1px solid var(--border-card);
+      margin-bottom: 32px;
+      box-shadow: var(--shadow-sm);
     }
-    .article-content {
-      font-size: 1.12rem;
-      line-height: 1.85;
-      color: var(--text-muted);
+    .article-body {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--text-body);
     }
-    .article-content h2 {
-      font-size: 1.85rem;
-      margin: 40px 0 16px;
-      color: var(--text-main);
+    .article-body h2 {
+      font-size: 1.5rem;
+      margin: 32px 0 12px;
     }
-    .article-content h3 {
-      font-size: 1.4rem;
-      margin: 28px 0 12px;
-      color: var(--text-main);
+    .article-body p {
+      margin-bottom: 18px;
+      font-size: 1rem;
+      color: var(--text-body);
     }
-    .article-content p {
-      margin-bottom: 22px;
+    .article-body ul, .article-body ol {
+      margin: 0 0 20px 24px;
     }
-    .article-content ul, .article-content ol {
-      margin: 0 0 24px 28px;
+    .article-body li {
+      margin-bottom: 6px;
     }
-    .article-content li {
-      margin-bottom: 8px;
+    .clean-callout {
+      background: var(--bg-subtle);
+      border-left: 4px solid var(--primary);
+      border-radius: var(--radius-sm);
+      padding: 18px 20px;
+      margin: 24px 0;
     }
-    .callout-box {
-      background: var(--bg-surface);
-      border-left: 4px solid var(--accent-volt);
-      border-radius: var(--radius-md);
-      padding: 24px;
-      margin: 32px 0;
-      border: 1px solid var(--border-subtle);
-    }
-    .callout-box h4 {
-      font-size: 1.15rem;
-      color: var(--accent-volt);
-      margin-bottom: 10px;
+    .clean-callout h4 {
+      font-size: 1rem;
+      color: var(--primary);
+      margin-bottom: 6px;
     }
   </style>
 </head>
 <body>
 
-  <!-- Navigation -->
+  <!-- Navigation Bar -->
   <header class="navbar">
     <div class="container">
       <a href="../index.html" class="brand">
-        <span>J4</span> FITNES
-        <span class="brand-badge">ARTIGO</span>
+        <div class="brand-icon">J4</div>
+        <div>J4 <span>FITNESS</span></div>
       </a>
 
       <nav>
@@ -125,21 +95,20 @@
       </nav>
 
       <div class="nav-actions">
-        <a href="../index.html#calculadora" class="badge">
-          <span class="badge-dot"></span>
-          CALCULAR TMB
+        <a href="../index.html#calculadora" class="btn-pill">
+          Calcular TMB
         </a>
       </div>
     </div>
   </header>
 
   <main>
-    <article class="article-container">
+    <article class="article-wrap">
       <div class="article-header">
-        <div class="badge">Fisiologia Metabólica • 21 de Outubro de 2026</div>
+        <span class="badge-clean">Fisiologia Metabólica • 21 de Outubro de 2026</span>
         <h1>Guia Definitivo da Taxa Metabólica Basal: Como Queimar Gordura Sem Passar Fome</h1>
-        <div class="blog-meta">
-          <span>✍️ Por Equipe Científica J4 Fitnes</span>
+        <div class="blog-meta-clean">
+          <span>✍️ Por Equipe Científica J4 Fitness</span>
           <span>•</span>
           <span>⏱️ 7 minutos de leitura</span>
         </div>
@@ -147,65 +116,60 @@
 
       <img src="../assets/images/blog-metabolismo.jpg" alt="Vias metabólicas celulares e bioenergética humana" class="article-hero-img">
 
-      <div class="article-content">
+      <div class="article-body">
         <p>
-          Se você já tentou cortar calorias drasticamente para emagrecer e acabou se sentindo exausto, irritado e, para piorar, estagnou na balança após poucas semanas, você foi vítima da desregulação metabólica. O erro número um da maioria das pessoas não é a falta de força de vontade, mas sim a <strong>completa ignorância sobre o funcionamento da Taxa Metabólica Basal (TMB)</strong>.
+          Se você já tentou cortar calorias drasticamente para emagrecer e acabou se sentindo fraco, desmotivado e estagnou na balança após poucas semanas, você foi vítima da desregulação metabólica. O erro mais comum da maioria das pessoas não é a falta de disciplina, mas sim a <strong>falta de compreensão sobre como a Taxa Metabólica Basal (TMB) funciona</strong>.
         </p>
 
-        <h2>1. O Que é Exatamente a Taxa Metabólica Basal?</h2>
+        <h2>1. O que é exatamente a Taxa Metabólica Basal?</h2>
         <p>
-          Imagine que você passasse 24 horas consecutivas deitado em uma cama de hospital, em uma sala climatizada, sem mexer sequer um dedo e em estado de repouso absoluto. Mesmo nessa condição, seu organismo consome uma quantidade maciça de energia:
+          Imagine que você passe 24 horas consecutivas deitado em uma cama de repouso absoluto, sem se mexer e em jejum. Mesmo nessa condição, seu organismo consome uma quantidade significativa de energia:
         </p>
         <ul>
-          <li><strong>Fígado:</strong> responsável por cerca de 27% do gasto basal (síntese protéica e desintoxicação).</li>
+          <li><strong>Fígado:</strong> consome cerca de 27% do gasto basal (síntese protéica e desintoxicação contínua).</li>
           <li><strong>Cérebro:</strong> queima aproximadamente 19% do total basal de glicose e corpos cetônicos.</li>
-          <li><strong>Músculos esqueléticos em repouso:</strong> demandam cerca de 18% da sua TMB.</li>
-          <li><strong>Rins e Coração:</strong> somam outros 20% contínuos de bombardeio eletrolítico e circulação.</li>
+          <li><strong>Músculos esqueléticos em repouso:</strong> consomem cerca de 18% da sua TMB.</li>
+          <li><strong>Rins e Coração:</strong> demandam outros 20% em batimentos e filtragem celular.</li>
         </ul>
 
-        <div class="callout-box">
-          <h4>💡 A Regra de Ouro do Metabolismo</h4>
+        <div class="clean-callout">
+          <h4>💡 Princípio de Preservação Metabólica</h4>
           <p>
-            A TMB é a linha de base biológica do seu corpo. Comer menos calorias do que a sua TMB basal faz com que seu hipotálamo interprete a situação como um período de fome e escassez pré-histórica, desacelerando a produção de hormônios tireoidianos (T3 e T4) e aumentando a grelina (hormônio da fome voraz).
+            A TMB é a linha de base biológica do seu corpo. Comer menos calorias do que a sua TMB basal faz com que seu organismo interprete a situação como um período de escassez extrema, desacelerando os hormônios tireoidianos e aumentando a fome.
           </p>
         </div>
 
         <h2>2. A Diferença Crucial Entre TMB e TDEE</h2>
         <p>
-          Muitos confundem a <strong>TMB</strong> com o <strong>Gasto Energético Total Diário (TDEE - Total Daily Energy Expenditure)</strong>. A TMB é apenas uma das parcelas do TDEE. O seu gasto diário total é composto pela fórmula:
+          A <strong>TMB</strong> é o que você gasta sem se mover. Já o <strong>TDEE (Gasto Energético Total Diário)</strong> é o gasto calórico real do seu dia completo. O TDEE é composto por:
         </p>
-        <p style="font-family: var(--font-mono); font-size: 1.1rem; color: var(--accent-volt); background: var(--bg-surface); padding: 14px; border-radius: var(--radius-sm);">
-          TDEE = TMB + NEAT + TEF + EAT
+        <p style="font-family: var(--font-mono); font-size: 0.95rem; color: var(--primary); background: var(--bg-subtle); padding: 12px; border-radius: var(--radius-sm); font-weight: 600;">
+          TDEE = TMB + NEAT + TEF + Treinos
         </p>
         <p>
           Onde:
         </p>
         <ul>
-          <li><strong>NEAT:</strong> Termogênese não associada ao exercício (seus passos ao longo do dia, trabalho, gesticulação).</li>
-          <li><strong>TEF:</strong> Efeito térmico dos alimentos (calorias gastas no processo de quebra da comida).</li>
-          <li><strong>EAT:</strong> O gasto pontual do seu treino na academia ou corrida.</li>
+          <li><strong>NEAT:</strong> Movimentação não ligada ao exercício (passos diários, subir escadas, gesticulação).</li>
+          <li><strong>TEF:</strong> Efeito térmico dos alimentos (calorias gastas no processo de digestão).</li>
+          <li><strong>Treinos:</strong> O gasto pontual da musculação ou atividade aeróbica.</li>
         </ul>
 
-        <h2>3. O Mito do "Metabolismo Lento": Como Destravar a Queima</h2>
+        <h2>3. Como Destravar a Queima de Gordura</h2>
         <p>
-          Você não nasceu com um metabolismo quebrado. O que acontece é que quando você perde peso rápido através de dietas restritivas, perde água e glicogênio, mas também <strong>massa muscular magra</strong>. Como o músculo é o tecido mais metabolicamente ativo do seu corpo, sua taxa metabólica basal cai.
+          Ao cortar calorias em excesso, você perde massa muscular além de gordura. Como o músculo consome muito mais energia em repouso do que a gordura, sua TMB despenca.
         </p>
         <p>
-          Para manter o metabolismo acelerado enquanto seca gordura:
+          Para manter o metabolismo ativo enquanto define o corpo:
         </p>
         <ol>
-          <li><strong>Mantenha um déficit de no máximo 20% sobre o seu TDEE:</strong> Se seu TDEE é 2.600 kcal, consuma aproximadamente 2.080 kcal. Nunca coma 1.200 kcal!</li>
-          <li><strong>Priorize o treinamento de força:</strong> O estímulo tensional da musculação sinaliza para o corpo que o tecido muscular é vital e não deve ser catabolizado.</li>
-          <li><strong>Consuma proteína adequada:</strong> De 1.8g a 2.4g de proteína por quilo de peso corporal todos os dias.</li>
+          <li><strong>Mantenha um déficit de cerca de 20% sobre o TDEE:</strong> Consuma calorias suficientes para manter seu corpo acima da TMB basal.</li>
+          <li><strong>Priorize musculação e treino de força:</strong> O estímulo de carga sinaliza que o tecido muscular é indispensável.</li>
+          <li><strong>Proteína em quantidade adequada:</strong> Mantenha entre 1.8g e 2.4g por quilo corporal todos os dias.</li>
         </ol>
 
-        <h2>Conclusão e Próximo Passo</h2>
-        <p>
-          Saber sua TMB exata é a bússola para qualquer estratégia nutricional de sucesso. Utilize agora mesmo a nossa ferramenta de cálculo clínico com as fórmulas de Mifflin-St Jeor e Katch-McArdle para montar seu plano com precisão cirúrgica.
-        </p>
-
-        <div style="margin-top: 40px; text-align: center;">
-          <a href="../index.html#calculadora" class="btn-calculate" style="display: inline-flex; max-width: 380px;">
+        <div style="margin-top: 36px; text-align: center;">
+          <a href="../index.html#calculadora" class="btn-pill" style="padding: 10px 24px;">
             Calcular Minha Taxa Metabólica Agora →
           </a>
         </div>
@@ -213,11 +177,11 @@
     </article>
   </main>
 
-  <footer class="footer">
+  <footer class="footer-clean">
     <div class="container">
-      <div class="footer-bottom">
-        <p>© 2026 J4 Fitnes. Informações embasadas em revisões sistemáticas de medicina esportiva.</p>
-        <a href="index.html" style="color: var(--accent-volt); font-weight: 700;">← Voltar para o Blog</a>
+      <div class="footer-copy">
+        <p>© 2026 J4 Fitness. Literatura alinhada à Sociedade Internacional de Nutrição Esportiva.</p>
+        <a href="index.html" style="color: var(--primary); font-weight: 600;">← Voltar para o Blog</a>
       </div>
     </div>
   </footer>
