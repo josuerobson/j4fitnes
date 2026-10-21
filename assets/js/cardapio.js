@@ -588,15 +588,29 @@
     const listBody = document.getElementById('grocery-list-body');
     if (!modal || !listBody) return;
 
+    const itemsList = Object.keys(consolidated);
+    const totalItems = itemsList.length;
+
     listBody.innerHTML = `
-      <div style="margin-bottom: 16px;">
-        <p>Lista consolidada dos ingredientes que você usará nas refeições de Segunda a Domingo:</p>
+      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--border-card);">
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <button type="button" id="btn-toggle-all-grocery" class="btn-select-all" style="padding: 6px 14px; font-weight: 700;">
+            ✓ Marcar Todos
+          </button>
+          <button type="button" id="btn-copy-grocery" class="btn-select-all" style="background: var(--bg-subtle); color: var(--text-body); border-color: var(--border-card);">
+            📋 Copiar Lista (WhatsApp)
+          </button>
+        </div>
+        <span id="grocery-counter" style="font-size: 0.82rem; font-weight: 600; color: var(--text-muted);">
+          0 de ${totalItems} itens no carrinho
+        </span>
       </div>
+
       <div class="grocery-grid-items">
-        ${Object.keys(consolidated).map(item => `
-          <div class="grocery-item-card">
-            <input type="checkbox" id="item-${item.replace(/\s+/g, '_')}">
-            <label for="item-${item.replace(/\s+/g, '_')}">
+        ${itemsList.map(item => `
+          <div class="grocery-item-card" id="card-${item.replace(/[^a-zA-Z0-9]/g, '_')}">
+            <input type="checkbox" class="grocery-chk" id="item-${item.replace(/[^a-zA-Z0-9]/g, '_')}">
+            <label for="item-${item.replace(/[^a-zA-Z0-9]/g, '_')}">
               <strong>${item}</strong>
               <span>Presente em ${consolidated[item].count} refeições na semana</span>
             </label>
@@ -604,6 +618,84 @@
         `).join('')}
       </div>
     `;
+
+    // Lógica de Marcar / Desmarcar Todos
+    const btnToggleAll = document.getElementById('btn-toggle-all-grocery');
+    const chks = listBody.querySelectorAll('.grocery-chk');
+    const counterEl = document.getElementById('grocery-counter');
+
+    function updateCounter() {
+      const checkedCount = listBody.querySelectorAll('.grocery-chk:checked').length;
+      if (counterEl) {
+        counterEl.textContent = `${checkedCount} de ${totalItems} itens no carrinho`;
+      }
+      if (btnToggleAll) {
+        if (checkedCount === totalItems && totalItems > 0) {
+          btnToggleAll.textContent = '✕ Desmarcar Todos';
+          btnToggleAll.style.background = '#FEE2E2';
+          btnToggleAll.style.color = '#DC2626';
+          btnToggleAll.style.borderColor = '#FCA5A5';
+        } else {
+          btnToggleAll.textContent = '✓ Marcar Todos';
+          btnToggleAll.style.background = '';
+          btnToggleAll.style.color = '';
+          btnToggleAll.style.borderColor = '';
+        }
+      }
+    }
+
+    chks.forEach(chk => {
+      chk.addEventListener('change', () => {
+        const parentCard = chk.closest('.grocery-item-card');
+        if (chk.checked) {
+          parentCard.style.opacity = '0.6';
+          parentCard.querySelector('strong').style.textDecoration = 'line-through';
+        } else {
+          parentCard.style.opacity = '1';
+          parentCard.querySelector('strong').style.textDecoration = 'none';
+        }
+        updateCounter();
+      });
+    });
+
+    if (btnToggleAll) {
+      btnToggleAll.addEventListener('click', () => {
+        const currentlyChecked = listBody.querySelectorAll('.grocery-chk:checked').length;
+        const markAll = currentlyChecked < totalItems;
+
+        chks.forEach(chk => {
+          chk.checked = markAll;
+          const parentCard = chk.closest('.grocery-item-card');
+          if (markAll) {
+            parentCard.style.opacity = '0.6';
+            parentCard.querySelector('strong').style.textDecoration = 'line-through';
+          } else {
+            parentCard.style.opacity = '1';
+            parentCard.querySelector('strong').style.textDecoration = 'none';
+          }
+        });
+        updateCounter();
+      });
+    }
+
+    // Copiar para WhatsApp
+    const btnCopy = document.getElementById('btn-copy-grocery');
+    if (btnCopy) {
+      btnCopy.addEventListener('click', () => {
+        const lines = ['🛒 *LISTA DE COMPRAS SEMANAL - J4 FITNESS* \n'];
+        itemsList.forEach(item => {
+          lines.push(`• ${item} (${consolidated[item].count}x na semana)`);
+        });
+        lines.push('\n_Gerado por J4 Fitness: https://j4fitnes.5450wp.easypanel.host/cardapio.html_');
+
+        const text = lines.join('\n');
+        navigator.clipboard.writeText(text).then(() => {
+          alert('Lista de compras copiada! Você pode colar diretamente no WhatsApp.');
+        }).catch(() => {
+          prompt('Copie a lista abaixo:', text);
+        });
+      });
+    }
 
     modal.style.display = 'flex';
   }
