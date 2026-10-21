@@ -1,89 +1,141 @@
 /**
- * J4 FITNESS - MOTOR DE CARDÁPIO SEMANAL PERSONALIZADO
- * Base nutricional brasileira (TACO / IBGE) e distribuição balanceada de macros
+ * J4 FITNESS - MOTOR INTELIGENTE DE CARDÁPIO SEMANAL PERSONALIZADO
+ * Arquitetura de Refeições com Slots Gastronômicos Reais (Culinária Brasileira + TACO)
+ * Evita repetições incoerentes (pão com pão, feijão com feijão)
+ * Garante proteína animal no almoço/jantar e recheio apropriado para pão/tapioca
  */
 
 (function () {
   'use strict';
 
-  // Banco de Alimentos Típicos do Brasil com porções e tabela nutricional
-  // Macros por porção de referência
-  const FOOD_DATABASE = {
-    desjejum: [
-      { id: 'agua_limao', name: 'Água morna com meio limão espremido', portion: '1 copo (250ml)', kcal: 8, prot: 0.2, carb: 2, fat: 0 },
-      { id: 'cafe_puro', name: 'Café preto coado (sem açúcar)', portion: '1 xícara (100ml)', kcal: 2, prot: 0.1, carb: 0.3, fat: 0 },
-      { id: 'shot_imunidade', name: 'Shot matinal (água, própolis e cúrcuma)', portion: '1 dose (50ml)', kcal: 15, prot: 0.1, carb: 3, fat: 0.1 },
-      { id: 'cha_verde', name: 'Chá verde natural infusionado', portion: '1 xícara (150ml)', kcal: 2, prot: 0, carb: 0.5, fat: 0 },
-      { id: 'glutamina_creatina', name: 'Creatina (5g) em 200ml de água', portion: '1 copo', kcal: 20, prot: 5, carb: 0, fat: 0 }
-    ],
+  // Banco de Alimentos Estruturado por Slots Lógicos
+  const MEAL_SLOTS_DB = {
+    // === CAFÉ DA MANHÃ ===
+    cafe_manha: {
+      bases: [
+        { id: 'pao_frances', name: 'Pão francês fresquinho', unit: 'unidade (50g)', baseQty: 1, kcal: 135, prot: 4.1, carb: 28, fat: 1.5, type: 'bread' },
+        { id: 'pao_integral', name: 'Pão 100% integral', unit: 'fatias (50g)', baseQty: 2, kcal: 120, prot: 4.5, carb: 22, fat: 1.5, type: 'bread' },
+        { id: 'tapioca', name: 'Tapioca de frigideira', unit: 'colheres de sopa de goma (50g)', baseQty: 3, kcal: 115, prot: 0.1, carb: 28, fat: 0.1, type: 'bread' },
+        { id: 'cuscuz', name: 'Cuscuz de milho nordestino', unit: 'fatia média (100g)', baseQty: 1, kcal: 112, prot: 2.5, carb: 25, fat: 0.5, type: 'bread' },
+        { id: 'aveia', name: 'Aveia em flocos finos', unit: 'colheres de sopa (30g)', baseQty: 2, kcal: 105, prot: 4.3, carb: 17, fat: 2.2, type: 'oats' }
+      ],
+      recheios: [
+        { id: 'ovos_mexidos', name: 'Ovos mexidos ou na chapa', unit: 'unidades', baseQty: 2, kcal: 150, prot: 13, carb: 1, fat: 10.5, fitWith: ['bread', 'oats'] },
+        { id: 'queijo_minas', name: 'Queijo minas frescal ou ricota', unit: 'fatias médias (30g)', baseQty: 1.5, kcal: 90, prot: 7.5, carb: 1.5, fat: 6.5, fitWith: ['bread'] },
+        { id: 'frango_desfiado_cm', name: 'Frango desfiado temperado (recheio)', unit: 'colheres de sopa (60g)', baseQty: 2, kcal: 95, prot: 18, carb: 0, fat: 2, fitWith: ['bread'] },
+        { id: 'pasta_amendoim', name: 'Pasta de amendoim integral', unit: 'colher de sopa (15g)', baseQty: 1, kcal: 90, prot: 4, carb: 3, fat: 7.5, fitWith: ['bread', 'oats'] }
+      ],
+      frutas: [
+        { id: 'banana', name: 'Banana prata fatiada', unit: 'unidade média (70g)', baseQty: 1, kcal: 70, prot: 0.9, carb: 18, fat: 0.2 },
+        { id: 'mamao', name: 'Mamão papaia em cubos', unit: 'fatia média (100g)', baseQty: 1, kcal: 45, prot: 0.5, carb: 11, fat: 0.1 },
+        { id: 'maca', name: 'Maçã nacional higienizada', unit: 'unidade média (120g)', baseQty: 1, kcal: 65, prot: 0.4, carb: 17, fat: 0.2 }
+      ],
+      bebidas: [
+        { id: 'cafe_puro', name: 'Café preto coado (sem açúcar)', unit: 'xícara (100ml)', baseQty: 1, kcal: 2, prot: 0.1, carb: 0.3, fat: 0 },
+        { id: 'cafe_com_leite', name: 'Café com leite desnatado ou semidesnatado', unit: 'xícara (150ml)', baseQty: 1, kcal: 65, prot: 4.5, carb: 7, fat: 2 }
+      ]
+    },
 
-    cafe_manha: [
-      { id: 'ovos_mexidos', name: 'Ovos mexidos ou cozidos', portion: '2 unidades médias (100g)', kcal: 150, prot: 13, carb: 1, fat: 10.5 },
-      { id: 'pao_frances', name: 'Pão francês fresquinho', portion: '1 unidade (50g)', kcal: 135, prot: 4.1, carb: 28, fat: 1.5 },
-      { id: 'pao_integral', name: 'Pão 100% integral', portion: '2 fatias (50g)', kcal: 120, prot: 4.5, carb: 22, fat: 1.5 },
-      { id: 'tapioca', name: 'Tapioca de frigideira', portion: '3 colheres de sopa de goma (50g)', kcal: 115, prot: 0.1, carb: 28, fat: 0.1 },
-      { id: 'cuscuz', name: 'Cuscuz de milho nordestino', portion: '1 fatia média (100g)', kcal: 112, prot: 2.5, carb: 25, fat: 0.5 },
-      { id: 'queijo_minas', name: 'Queijo minas frescal ou ricota', portion: '1 fatia média (30g)', kcal: 66, prot: 5.2, carb: 1, fat: 4.8 },
-      { id: 'banana', name: 'Banana prata ou nanica', portion: '1 unidade média (70g)', kcal: 70, prot: 0.9, carb: 18, fat: 0.2 },
-      { id: 'mamao', name: 'Mamão papaia picado', portion: '1 fatia generosa (100g)', kcal: 45, prot: 0.5, carb: 11, fat: 0.1 },
-      { id: 'aveia', name: 'Aveia em flocos finos', portion: '2 colheres de sopa (30g)', kcal: 105, prot: 4.3, carb: 17, fat: 2.2 },
-      { id: 'iogurte_natural', name: 'Iogurte natural desnatado', portion: '1 pote (160g)', kcal: 85, prot: 6.8, carb: 9.5, fat: 2 },
-      { id: 'pasta_amendoim', name: 'Pasta de amendoim integral', portion: '1 colher de sopa rasa (15g)', kcal: 90, prot: 4, carb: 3, fat: 7.5 },
-      { id: 'cafe_com_leite', name: 'Café com leite semidesnatado', portion: '1 xícara média (150ml)', kcal: 65, prot: 4.5, carb: 7, fat: 2.2 }
-    ],
+    // === ALMOÇO & JANTAR ===
+    almoco: {
+      proteinas: [
+        { id: 'frango_grelhado', name: 'Peito de frango grelhado em tiras', unit: 'g pesados pronto', baseQty: 130, kcal: 208, prot: 40, carb: 0, fat: 4.2 },
+        { id: 'patinho_moido', name: 'Carne bovina magra (patinho moído)', unit: 'g pesados pronto', baseQty: 130, kcal: 238, prot: 41, carb: 0, fat: 7.5 },
+        { id: 'tilapia_peixe', name: 'Filé de tilápia grelhada com limão', unit: 'g pesados pronto', baseQty: 150, kcal: 180, prot: 39, carb: 0, fat: 2.8 },
+        { id: 'alcatra_magra', name: 'Bife de alcatra grelhado acebolado', unit: 'g pesados pronto', baseQty: 130, kcal: 245, prot: 40, carb: 0, fat: 8.5 },
+        { id: 'omelete_almoco', name: 'Omelete de 3 ovos com cheiro-verde', unit: 'unidades de ovos', baseQty: 3, kcal: 225, prot: 19.5, carb: 1.5, fat: 15.5 }
+      ],
+      carboidratos: [
+        { id: 'arroz_branco', name: 'Arroz branco tradicional cozido', unit: 'colheres de servir (~100g)', baseQty: 2, kcal: 130, prot: 2.6, carb: 28, fat: 0.4 },
+        { id: 'arroz_integral', name: 'Arroz integral soltinho', unit: 'colheres de servir (~100g)', baseQty: 2, kcal: 120, prot: 2.6, carb: 26, fat: 1 },
+        { id: 'batata_doce', name: 'Batata-doce cozida ou assada', unit: 'unidade média (~120g)', baseQty: 1, kcal: 92, prot: 1.5, carb: 22, fat: 0.1 },
+        { id: 'mandioca', name: 'Mandioca (aipim) cozida', unit: 'pedaço médio (~100g)', baseQty: 1, kcal: 125, prot: 0.6, carb: 30, fat: 0.3 },
+        { id: 'batata_inglesa', name: 'Batata inglesa cozida ou purê leve', unit: 'unidade média (~120g)', baseQty: 1, kcal: 65, prot: 1.5, carb: 15, fat: 0.1 }
+      ],
+      leguminosas: [
+        { id: 'feijao_carioca', name: 'Feijão carioca temperado', unit: 'concha média (~100g)', baseQty: 1, kcal: 76, prot: 4.8, carb: 13.6, fat: 0.5 },
+        { id: 'feijao_preto', name: 'Feijão preto cozido', unit: 'concha média (~100g)', baseQty: 1, kcal: 77, prot: 4.5, carb: 14, fat: 0.5 },
+        { id: 'grao_bico', name: 'Grão-de-bico cozido temperado', unit: 'colheres de sopa (~80g)', baseQty: 3, kcal: 95, prot: 5.5, carb: 16, fat: 1.5 }
+      ],
+      acompanhamentos: [
+        { id: 'salada_azeite', name: 'Salada verde mista (alface, tomate, rúcula) + azeite extra virgem', unit: '1 prato fundo + 1 colher de sobremesa de azeite', baseQty: 1, kcal: 62, prot: 1.5, carb: 3.5, fat: 5 },
+        { id: 'legumes_vapor', name: 'Mix de legumes cozidos no vapor (cenoura, abobrinha, brócolis)', unit: '1 pegador farto (120g)', baseQty: 1, kcal: 42, prot: 2.2, carb: 8.5, fat: 0.3 }
+      ]
+    },
 
-    almoco: [
-      { id: 'arroz_branco', name: 'Arroz branco tradicional cozido', portion: '2 colheres de servir (100g)', kcal: 130, prot: 2.6, carb: 28, fat: 0.4 },
-      { id: 'arroz_integral', name: 'Arroz integral soltinho', portion: '2 colheres de servir (100g)', kcal: 120, prot: 2.6, carb: 26, fat: 1 },
-      { id: 'feijao_carioca', name: 'Feijão carioca temperado', portion: '1 concha média (100g)', kcal: 76, prot: 4.8, carb: 13.6, fat: 0.5 },
-      { id: 'feijao_preto', name: 'Feijão preto cozido', portion: '1 concha média (100g)', kcal: 77, prot: 4.5, carb: 14, fat: 0.5 },
-      { id: 'frango_grelhado', name: 'Peito de frango grelhado em tiras', portion: '1 filé médio (120g)', kcal: 192, prot: 37, carb: 0, fat: 3.8 },
-      { id: 'patinho_moido', name: 'Patinho bovino moído refogado', portion: '1 porção média (120g)', kcal: 220, prot: 38, carb: 0, fat: 7 },
-      { id: 'tilapia_peixe', name: 'Filé de tilápia grelhada', portion: '1 filé médio (130g)', kcal: 156, prot: 34, carb: 0, fat: 2.5 },
-      { id: 'batata_doce', name: 'Batata-doce cozida ou assada', portion: '1 unidade média (100g)', kcal: 77, prot: 1.3, carb: 18.4, fat: 0.1 },
-      { id: 'batata_inglesa', name: 'Batata inglesa cozida', portion: '1 unidade média (120g)', kcal: 65, prot: 1.5, carb: 15, fat: 0.1 },
-      { id: 'mandioca', name: 'Mandioca (aipim) cozida', portion: '1 pedaço médio (100g)', kcal: 125, prot: 0.6, carb: 30, fat: 0.3 },
-      { id: 'salada_verde', name: 'Salada de folhas verdes à vontade (alface, rúcula)', portion: '1 prato raso cheio', kcal: 18, prot: 1.5, carb: 3, fat: 0.2 },
-      { id: 'legumes_cozidos', name: 'Mix de legumes (cenoura, abobrinha, brócolis)', portion: '1 pegador (100g)', kcal: 35, prot: 2, carb: 7, fat: 0.3 },
-      { id: 'azeite_oliva', name: 'Azeite de oliva extra virgem', portion: '1 colher de sobremesa (5ml)', kcal: 44, prot: 0, carb: 0, fat: 5 }
-    ],
+    // === CAFÉ DA TARDE / LANCHE ===
+    cafe_tarde: {
+      combos: [
+        {
+          id: 'combo_crepioca',
+          name: 'Crepioca Fit Recheada',
+          items: [
+            { name: 'Massa de Crepioca (1 ovo + 2 colheres de sopa de tapioca)', unit: '1 unidade', kcal: 155, prot: 7.5, carb: 19, fat: 5.5 },
+            { name: 'Recheio: Queijo branco ou frango desfiado', unit: '40g', kcal: 75, prot: 10, carb: 0.5, fat: 3.5 }
+          ]
+        },
+        {
+          id: 'combo_sanduiche',
+          name: 'Sanduíche Natural Proteico',
+          items: [
+            { name: 'Pão 100% integral', unit: '2 fatias', kcal: 120, prot: 4.5, carb: 22, fat: 1.5 },
+            { name: 'Recheio: Frango desfiado ou atum sólido com ricota', unit: '60g', kcal: 95, prot: 16, carb: 1, fat: 2.5 }
+          ]
+        },
+        {
+          id: 'combo_iogurte_aveia',
+          name: 'Iogurte Bowl com Frutas e Fibras',
+          items: [
+            { name: 'Iogurte natural desnatado', unit: '1 pote (160g)', kcal: 85, prot: 6.8, carb: 9.5, fat: 2 },
+            { name: 'Banana fatiada ou morangos frescos', unit: '1 porção (80g)', kcal: 60, prot: 0.8, carb: 15, fat: 0.2 },
+            { name: 'Aveia em flocos ou sementes de chia', unit: '1 colher de sopa (15g)', kcal: 52, prot: 2.1, carb: 8.5, fat: 1.1 }
+          ]
+        },
+        {
+          id: 'combo_shake_whey',
+          name: 'Shake de Proteína com Fruta',
+          items: [
+            { name: 'Whey Protein (isolado ou concentrado)', unit: '1 scoop (30g) em 200ml de água', kcal: 120, prot: 24, carb: 2.5, fat: 1.5 },
+            { name: 'Fruta de acompanhamento (maçã ou banana)', unit: '1 unidade', kcal: 70, prot: 0.8, carb: 18, fat: 0.2 }
+          ]
+        },
+        {
+          id: 'combo_fruta_castanhas',
+          name: 'Lanche Rápido: Fruta & Oleaginosas',
+          items: [
+            { name: 'Maçã ou pêra fresca', unit: '1 unidade média', kcal: 65, prot: 0.4, carb: 17, fat: 0.2 },
+            { name: 'Castanha-do-Pará ou nozes', unit: '3 unidades (15g)', kcal: 98, prot: 2.1, carb: 1.8, fat: 9.8 }
+          ]
+        }
+      ]
+    },
 
-    cafe_tarde: [
-      { id: 'sanduiche_frango', name: 'Sanduíche natural de pão integral e frango', portion: '1 unidade', kcal: 210, prot: 18, carb: 24, fat: 4 },
-      { id: 'crepioca', name: 'Crepioca (1 ovo + 2 colheres de tapioca)', portion: '1 unidade média', kcal: 155, prot: 7.5, carb: 19, fat: 5.5 },
-      { id: 'iogurte_fruta', name: 'Iogurte natural com morango picado', portion: '1 taça (180g)', kcal: 115, prot: 7.2, carb: 16, fat: 2.2 },
-      { id: 'shake_whey', name: 'Shake de Whey Protein com água ou leite desnatado', portion: '1 dose (30g)', kcal: 125, prot: 24, carb: 3, fat: 1.5 },
-      { id: 'maca_castanhas', name: 'Maçã nacional com 3 castanhas-do-Pará', portion: '1 porção', kcal: 170, prot: 2.5, carb: 21, fat: 10 },
-      { id: 'banana_aveia_canela', name: 'Banana aquecida com aveia e canela', portion: '1 pratinho', kcal: 175, prot: 5.2, carb: 35, fat: 2.4 },
-      { id: 'queijo_coalho', name: 'Queijo branco ou ricota com torrada integral', portion: '2 torradas + 30g queijo', kcal: 140, prot: 8, carb: 15, fat: 5 }
-    ],
+    // === DESJEJUM & CEIA (Opcionais) ===
+    desjejum: {
+      opcoes: [
+        { id: 'desj_agua_limao', name: 'Água morna com meio limão espremido em jejum', unit: '1 copo (250ml)', kcal: 8, prot: 0.2, carb: 2, fat: 0 },
+        { id: 'desj_cafe', name: 'Café preto coado puro sem açúcar', unit: '1 xícara (100ml)', kcal: 2, prot: 0.1, carb: 0.3, fat: 0 },
+        { id: 'desj_shot', name: 'Shot matinal de imunidade (água, própolis, cúrcuma e gengibre)', unit: '1 dose (50ml)', kcal: 15, prot: 0.1, carb: 3, fat: 0.1 }
+      ]
+    },
 
-    janta: [
-      { id: 'janta_arroz_feijao', name: 'Arroz, feijão e peito de frango com legumes', portion: '1 prato balanceado', kcal: 420, prot: 42, carb: 48, fat: 5.5 },
-      { id: 'patinho_pure', name: 'Patinho moído com purê de batata inglesa', portion: '1 prato médio', kcal: 360, prot: 38, carb: 32, fat: 7.5 },
-      { id: 'omelete_completo', name: 'Omelete de 3 ovos com tomate, cebola e espinafre', portion: '1 omelete grande', kcal: 245, prot: 20, carb: 4, fat: 16.5 },
-      { id: 'tilapia_legumes', name: 'Filé de tilápia assado com abobrinha e cenoura', portion: '1 porção farta', kcal: 260, prot: 36, carb: 12, fat: 4 },
-      { id: 'sopa_legumes_frango', name: 'Sopa caseira de legumes com frango desfiado', portion: '1 prato fundo (300ml)', kcal: 230, prot: 25, carb: 22, fat: 3.5 },
-      { id: 'salada_atum', name: 'Saladão colorido com atum sólido e grão-de-bico', portion: '1 bowl grande', kcal: 310, prot: 32, carb: 26, fat: 5 }
-    ],
-
-    ceia: [
-      { id: 'abacate_limao', name: 'Abacate amassado com gotas de limão', portion: '2 colheres de sopa (50g)', kcal: 80, prot: 1, carb: 3, fat: 8 },
-      { id: 'cha_camomila', name: 'Chá calmante de camomila ou melissa (sem açúcar)', portion: '1 xícara (200ml)', kcal: 2, prot: 0, carb: 0.5, fat: 0 },
-      { id: 'castanhas_para', name: 'Castanha-do-Pará', portion: '2 unidades (10g)', kcal: 65, prot: 1.4, carb: 1.2, fat: 6.5 },
-      { id: 'iogurte_ceia', name: 'Iogurte natural desnatado com canela em pó', portion: '1 pote pequeno (120g)', kcal: 65, prot: 5.5, carb: 7, fat: 1.2 },
-      { id: 'ovo_cozido_ceia', name: 'Ovo cozido com pitada de orégano', portion: '1 unidade', kcal: 75, prot: 6.5, carb: 0.5, fat: 5.3 },
-      { id: 'leite_morno_canela', name: 'Leite desnatado morno com canela', portion: '1 xícara (150ml)', kcal: 50, prot: 4.8, carb: 7.2, fat: 0.2 }
-    ]
+    ceia: {
+      opcoes: [
+        { id: 'ceia_cha_castanhas', name: 'Chá calmante de camomila ou melissa + 2 castanhas-do-Pará', unit: '1 xícara + 2 castanhas (10g)', kcal: 67, prot: 1.4, carb: 1.7, fat: 6.5 },
+        { id: 'ceia_abacate', name: 'Abacate com gotas de limão (gordura boa para sono)', unit: '2 colheres de sopa (50g)', kcal: 80, prot: 1, carb: 3, fat: 8 },
+        { id: 'ceia_iogurte', name: 'Iogurte natural com canela em pó polvilhada', unit: '1/2 pote (100g)', kcal: 55, prot: 4.5, carb: 6, fat: 1.2 },
+        { id: 'ceia_ovo', name: 'Ovo cozido temperado com orégano e sal rosa', unit: '1 unidade', kcal: 75, prot: 6.5, carb: 0.5, fat: 5.3 }
+      ]
+    }
   };
 
   const MEAL_LABELS = {
-    desjejum: { name: 'Desjejum (Ao acordar)', icon: '🌅', pct: 0.05 },
-    cafe_manha: { name: 'Café da Manhã', icon: '☕', pct: 0.22 },
-    almoco: { name: 'Almoço Completo', icon: '🥗', pct: 0.33 },
+    desjejum: { name: 'Desjejum (Ao acordar)', icon: '🌅', pct: 0.04 },
+    cafe_manha: { name: 'Café da Manhã', icon: '☕', pct: 0.23 },
+    almoco: { name: 'Almoço Completo', icon: '🥗', pct: 0.34 },
     cafe_tarde: { name: 'Café da Tarde / Lanche', icon: '🥪', pct: 0.15 },
     janta: { name: 'Jantar', icon: '🍲', pct: 0.20 },
-    ceia: { name: 'Ceia (Antes de dormir)', icon: '🌙', pct: 0.05 }
+    ceia: { name: 'Ceia (Antes de dormir)', icon: '🌙', pct: 0.04 }
   };
 
   const DAYS_OF_WEEK = [
@@ -98,25 +150,16 @@
 
   // Estado do Criador de Cardápio
   const menuState = {
-    targetCalories: 2200,
-    bmr: 1750,
-    tdee: 2700,
+    targetCalories: 2599,
+    bmr: 2096,
+    tdee: 3249,
     goal: 'deficit',
-    macros: { carb: 220, prot: 180, fat: 60 },
+    macros: { carb: 260, prot: 195, fat: 72 },
     selectedMeals: ['cafe_manha', 'almoco', 'cafe_tarde', 'janta'],
-    selectedFoods: {
-      desjejum: ['agua_limao'],
-      cafe_manha: ['ovos_mexidos', 'pao_integral', 'banana', 'cafe_com_leite'],
-      almoco: ['arroz_branco', 'feijao_carioca', 'frango_grelhado', 'salada_verde', 'azeite_oliva'],
-      cafe_tarde: ['crepioca', 'maca_castanhas'],
-      janta: ['janta_arroz_feijao', 'salada_verde'],
-      ceia: ['cha_camomila', 'castanhas_para']
-    },
     weeklyPlan: null,
     currentDayIndex: 0
   };
 
-  // Carrega os dados da calculadora principal
   function loadCalculatorData() {
     try {
       const stored = localStorage.getItem('j4fitness_user_metrics') || localStorage.getItem('j4fitnes_user_metrics');
@@ -124,24 +167,27 @@
         const data = JSON.parse(stored);
         if (data.bmr) menuState.bmr = data.bmr;
         if (data.tdee) menuState.tdee = data.tdee;
+        if (data.targetCalories) menuState.targetCalories = data.targetCalories;
+        if (data.macros) menuState.macros = data.macros;
         if (data.state && data.state.goal) menuState.goal = data.state.goal;
-
-        // Determina alvo calórico
-        const goalPcts = { deficit: -0.20, maintenance: 0.0, lean_bulk: 0.12, bulk: 0.20 };
-        const factor = 1 + (goalPcts[menuState.goal] || -0.20);
-        menuState.targetCalories = Math.round(menuState.tdee * factor);
-
-        // Macros aproximados (40% carb, 35% prot, 25% fat)
-        menuState.macros.carb = Math.round((menuState.targetCalories * 0.40) / 4);
-        menuState.macros.prot = Math.round((menuState.targetCalories * 0.35) / 4);
-        menuState.macros.fat = Math.round((menuState.targetCalories * 0.25) / 9);
       }
     } catch (e) {
       console.warn('Erro ao carregar dados da calculadora:', e);
     }
   }
 
-  // Renderiza a interface de seleção de refeições
+  function updateHeaderDisplays() {
+    const elKcal = document.getElementById('disp-target-kcal');
+    const elProt = document.getElementById('disp-target-prot');
+    const elCarb = document.getElementById('disp-target-carb');
+    const elFat = document.getElementById('disp-target-fat');
+
+    if (elKcal) elKcal.textContent = menuState.targetCalories.toLocaleString('pt-BR');
+    if (elProt) elProt.textContent = menuState.macros.prot + 'g';
+    if (elCarb) elCarb.textContent = menuState.macros.carb + 'g';
+    if (elFat) elFat.textContent = menuState.macros.fat + 'g';
+  }
+
   function renderMealCheckboxes() {
     const container = document.getElementById('meal-selection-grid');
     if (!container) return;
@@ -158,7 +204,7 @@
         <span class="meal-icon">${meal.icon}</span>
         <div class="meal-info">
           <h5>${meal.name}</h5>
-          <span class="meal-hint">${isChecked ? 'Selecionada' : 'Clique para incluir'}</span>
+          <span class="meal-hint">${isChecked ? 'Refeição Selecionada' : 'Clique para incluir'}</span>
         </div>
       `;
 
@@ -171,11 +217,10 @@
             menuState.selectedMeals.push(mealKey);
           }
           label.classList.add('active');
-          label.querySelector('.meal-hint').textContent = 'Selecionada';
+          label.querySelector('.meal-hint').textContent = 'Refeição Selecionada';
         } else {
-          // Garante ao menos 2 refeições
           if (menuState.selectedMeals.length <= 2) {
-            alert('Por favor, selecione ao menos 2 refeições para o seu dia.');
+            alert('Mantenha ao menos 2 refeições selecionadas para o seu dia.');
             input.checked = true;
             return;
           }
@@ -183,99 +228,48 @@
           label.classList.remove('active');
           label.querySelector('.meal-hint').textContent = 'Clique para incluir';
         }
-        renderFoodPreferences();
+        renderRuleNotice();
       });
 
       container.appendChild(label);
     });
   }
 
-  // Renderiza as seções de escolha de alimentos para cada refeição ativa
-  function renderFoodPreferences() {
+  // Explica as regras inteligentes de montagem do cardápio para o usuário
+  function renderRuleNotice() {
     const container = document.getElementById('food-preferences-container');
     if (!container) return;
 
-    container.innerHTML = '';
-
-    menuState.selectedMeals.forEach(mealKey => {
-      const meal = MEAL_LABELS[mealKey];
-      const foods = FOOD_DATABASE[mealKey] || [];
-      const currentSelected = menuState.selectedFoods[mealKey] || [];
-
-      const box = document.createElement('div');
-      box.className = 'food-category-box';
-      box.innerHTML = `
-        <div class="category-header">
-          <div style="display: flex; align-items: center; gap: 8px;">
-            <span style="font-size: 1.3rem;">${meal.icon}</span>
-            <div>
-              <h4>${meal.name}</h4>
-              <p>Selecione os alimentos saudáveis que você mais gosta nessa refeição:</p>
-            </div>
+    container.innerHTML = `
+      <div style="background: #FFFFFF; border: 1px solid var(--border-card); border-radius: var(--radius-md); padding: 20px; margin-bottom: 20px;">
+        <h4 style="font-size: 1.05rem; color: var(--text-main); margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+          <span>⚖️</span> Regras Inteligentes de Combinação Alimentar
+        </h4>
+        <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 12px;">
+          O sistema aplica a <strong>arquitetura nutricional brasileira balanceada</strong> para impedir repetições incoerentes:
+        </p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; font-size: 0.85rem;">
+          <div style="background: var(--bg-subtle); padding: 12px; border-radius: var(--radius-sm); border-left: 3px solid #2563EB;">
+            <strong>☕ Café da manhã sem repetição:</strong> Escolhe 1 base (pão OU tapioca OU cuscuz OU aveia) acompanhado de recheio proteico real (ovos, queijo ou pasta de amendoim) + fruta + café.
           </div>
-          <button type="button" class="btn-select-all" data-meal="${mealKey}">Marcar Sugeridos</button>
+          <div style="background: var(--bg-subtle); padding: 12px; border-radius: var(--radius-sm); border-left: 3px solid #059669;">
+            <strong>🥗 Almoço & Jantar com Proteína Animal:</strong> Sempre inclui exatamente 1 proteína animal nobre (frango, carne magra, tilápia ou ovos) + 1 carboidrato + 1 concha de feijão + salada com azeite. Nunca repete dois feijões!
+          </div>
+          <div style="background: var(--bg-subtle); padding: 12px; border-radius: var(--radius-sm); border-left: 3px solid #D97706;">
+            <strong>🥪 Lanche Único e Completo:</strong> Seleciona 1 combo coerente (ex: crepioca recheada OU sanduíche natural OU iogurte com aveia e fruta), sem misturar múltiplos lanches.
+          </div>
         </div>
-        <div class="food-pills-wrap" id="pills-${mealKey}"></div>
-      `;
-
-      const pillsWrap = box.querySelector(`#pills-${mealKey}`);
-
-      foods.forEach(food => {
-        const isSelected = currentSelected.includes(food.id);
-        const pill = document.createElement('button');
-        pill.type = 'button';
-        pill.className = `food-pill ${isSelected ? 'selected' : ''}`;
-        pill.innerHTML = `
-          <span class="check-mark">${isSelected ? '✓' : '+'}</span>
-          <span class="food-name">${food.name}</span>
-          <span class="food-cal">${food.kcal} kcal</span>
-        `;
-
-        pill.addEventListener('click', () => {
-          const list = menuState.selectedFoods[mealKey] || [];
-          if (list.includes(food.id)) {
-            if (list.length <= 1) {
-              alert('Mantenha pelo menos um alimento selecionado por refeição.');
-              return;
-            }
-            menuState.selectedFoods[mealKey] = list.filter(id => id !== food.id);
-            pill.classList.remove('selected');
-            pill.querySelector('.check-mark').textContent = '+';
-          } else {
-            list.push(food.id);
-            menuState.selectedFoods[mealKey] = list;
-            pill.classList.add('selected');
-            pill.querySelector('.check-mark').textContent = '✓';
-          }
-        });
-
-        pillsWrap.appendChild(pill);
-      });
-
-      // Botão marcar todos sugeridos
-      const btnAll = box.querySelector('.btn-select-all');
-      btnAll.addEventListener('click', () => {
-        menuState.selectedFoods[mealKey] = foods.map(f => f.id);
-        const allPills = pillsWrap.querySelectorAll('.food-pill');
-        allPills.forEach(p => {
-          p.classList.add('selected');
-          p.querySelector('.check-mark').textContent = '✓';
-        });
-      });
-
-      container.appendChild(box);
-    });
+      </div>
+    `;
   }
 
   /**
-   * Algoritmo de Geração Semanal Inteligente
-   * Distribui calorias proporcionais por refeição e varia alimentos a cada dia
+   * Gerador Semanal de Cardápio com Seleção de Slots
    */
   function generateWeeklyPlan() {
-    const totalTarget = menuState.targetCalories;
+    const totalTargetKcal = menuState.targetCalories;
     const plan = {};
 
-    // Calcula proporções ajustadas para o número de refeições selecionadas
     let totalBasePct = 0;
     menuState.selectedMeals.forEach(m => {
       totalBasePct += MEAL_LABELS[m].pct;
@@ -291,68 +285,27 @@
       menuState.selectedMeals.forEach(mealKey => {
         const mealDef = MEAL_LABELS[mealKey];
         const normalizedPct = mealDef.pct / totalBasePct;
-        const mealTargetKcal = Math.round(totalTarget * normalizedPct);
+        const mealTargetKcal = Math.round(totalTargetKcal * normalizedPct);
 
-        const availableFoodIds = menuState.selectedFoods[mealKey] || [];
-        const pool = FOOD_DATABASE[mealKey].filter(f => availableFoodIds.includes(f.id));
+        const mealFoods = assembleMealBySlots(mealKey, dayIndex, mealTargetKcal);
 
-        if (pool.length === 0) return;
-
-        // Variação dos alimentos com base no dia da semana
-        // Escolhe de 2 a 3 alimentos que combinem bem para atingir a meta
-        const chosenFoods = [];
-        let accumulatedKcal = 0;
-
-        // Sorteia ou escala circularmente pelo índice do dia
-        const startIndex = dayIndex % pool.length;
-        const candidate1 = pool[startIndex];
-        const candidate2 = pool[(startIndex + 1) % pool.length];
-        const candidate3 = pool.length > 2 ? pool[(startIndex + 2) % pool.length] : null;
-
-        const selectedForMeal = [candidate1];
-        if (candidate2 && candidate2.id !== candidate1.id) selectedForMeal.push(candidate2);
-        if (candidate3 && candidate3.id !== candidate1.id && candidate3.id !== candidate2.id && mealTargetKcal > 300) {
-          selectedForMeal.push(candidate3);
-        }
-
-        // Soma inicial dos itens selecionados
-        let baseSumKcal = selectedForMeal.reduce((sum, item) => sum + item.kcal, 0);
-        if (baseSumKcal <= 0) baseSumKcal = 1;
-
-        // Fator de escala para bater precisamente com a meta da refeição
-        const scaleFactor = Math.max(0.6, Math.min(2.5, mealTargetKcal / baseSumKcal));
-
-        selectedForMeal.forEach(f => {
-          const itemKcal = Math.round(f.kcal * scaleFactor);
-          const itemProt = Number((f.prot * scaleFactor).toFixed(1));
-          const itemCarb = Number((f.carb * scaleFactor).toFixed(1));
-          const itemFat = Number((f.fat * scaleFactor).toFixed(1));
-
-          chosenFoods.push({
-            name: f.name,
-            portion: f.portion,
-            scaledPortion: scalePortionDescription(f.portion, scaleFactor),
-            kcal: itemKcal,
-            prot: itemProt,
-            carb: itemCarb,
-            fat: itemFat
-          });
-
-          accumulatedKcal += itemKcal;
-          dayProt += itemProt;
-          dayCarb += itemCarb;
-          dayFat += itemFat;
+        let actualKcal = 0;
+        mealFoods.forEach(f => {
+          actualKcal += f.kcal;
+          dayProt += f.prot;
+          dayCarb += f.carb;
+          dayFat += f.fat;
         });
 
-        dayKcal += accumulatedKcal;
+        dayKcal += actualKcal;
 
         dayMeals.push({
           mealKey,
           name: mealDef.name,
           icon: mealDef.icon,
           targetKcal: mealTargetKcal,
-          actualKcal: accumulatedKcal,
-          foods: chosenFoods
+          actualKcal,
+          foods: mealFoods
         });
       });
 
@@ -370,7 +323,6 @@
     renderWeeklyTabs();
     renderDayPlan(DAYS_OF_WEEK[menuState.currentDayIndex].key);
 
-    // Scroll suave para os resultados gerados
     const planView = document.getElementById('cardapio-resultado-wrapper');
     if (planView) {
       planView.style.display = 'block';
@@ -378,15 +330,145 @@
     }
   }
 
-  // Ajusta a descrição da porção pelo fator multiplicador
-  function scalePortionDescription(portion, factor) {
-    if (!factor || Math.abs(factor - 1.0) < 0.15) return portion;
-    if (factor > 1.4) return `${portion} (porção reforçada ~${Math.round(factor * 100)}%)`;
-    if (factor < 0.75) return `${portion} (porção moderada ~${Math.round(factor * 100)}%)`;
-    return portion;
+  /**
+   * Monta os alimentos de uma refeição respeitando rigorosamente os slots gastronômicos
+   */
+  function assembleMealBySlots(mealKey, dayIndex, targetKcal) {
+    const foods = [];
+
+    if (mealKey === 'cafe_manha') {
+      const db = MEAL_SLOTS_DB.cafe_manha;
+      // 1. Base única de carboidrato (varia dia a dia: Pão francês, Pão integral, Tapioca, Cuscuz, Aveia)
+      const base = db.bases[dayIndex % db.bases.length];
+
+      // 2. Recheio / Proteína de acompanhamento condizente com a base
+      const compatibleRecheios = db.recheios.filter(r => r.fitWith.includes(base.type));
+      const recheio = compatibleRecheios[dayIndex % compatibleRecheios.length] || db.recheios[0];
+
+      // 3. Fruta matinal
+      const fruta = db.frutas[dayIndex % db.frutas.length];
+
+      // 4. Bebida
+      const bebida = db.bebidas[dayIndex % db.bebidas.length];
+
+      // Cálculo de proporção para atingir as calorias necessárias
+      const rawSum = base.kcal + recheio.kcal + fruta.kcal + bebida.kcal;
+      const factor = Math.max(0.7, Math.min(2.0, targetKcal / rawSum));
+
+      foods.push(formatFoodItem(`${base.name} (base)`, base.unit, base.baseQty, factor, base));
+      foods.push(formatFoodItem(`Recheio: ${recheio.name}`, recheio.unit, recheio.baseQty, factor, recheio));
+      foods.push(formatFoodItem(fruta.name, fruta.unit, fruta.baseQty, 1.0, fruta));
+      foods.push(formatFoodItem(bebida.name, bebida.unit, bebida.baseQty, 1.0, bebida));
+    }
+
+    else if (mealKey === 'almoco' || mealKey === 'janta') {
+      const db = MEAL_SLOTS_DB.almoco;
+      // Se for janta, defasamos o índice em +2 para que o jantar nunca repita a mesma carne ou carboidrato do almoço!
+      const offset = (mealKey === 'janta') ? 2 : 0;
+      const effectiveIndex = (dayIndex + offset) % db.proteinas.length;
+
+      // 1. PROTEÍNA ANIMAL OBRIGATÓRIA (1 item único!)
+      const prot = db.proteinas[effectiveIndex];
+
+      // 2. CARBOIDRATO BASE ÚNICO (Arroz, Batata ou Mandioca - 1 item apenas!)
+      const carb = db.carboidratos[(dayIndex + offset) % db.carboidratos.length];
+
+      // 3. LEGUMINOSA (1 concha de Feijão - NUNCA 2 feijões juntos!)
+      const leg = db.leguminosas[(dayIndex + offset) % db.leguminosas.length];
+
+      // 4. ACOMPANHAMENTO (Salada com azeite ou legumes no vapor)
+      const acomp = db.acompanhamentos[(dayIndex + offset) % db.acompanhamentos.length];
+
+      const rawSum = prot.kcal + carb.kcal + leg.kcal + acomp.kcal;
+      const factor = Math.max(0.7, Math.min(2.2, targetKcal / rawSum));
+
+      foods.push(formatFoodItem(`🥩 Proteína: ${prot.name}`, prot.unit, prot.baseQty, factor, prot));
+      foods.push(formatFoodItem(`🍚 Carboidrato: ${carb.name}`, carb.unit, carb.baseQty, factor, carb));
+      foods.push(formatFoodItem(`🫘 Leguminosa: ${leg.name}`, leg.unit, leg.baseQty, factor, leg));
+      foods.push(formatFoodItem(`🥗 Fibras: ${acomp.name}`, acomp.unit, acomp.baseQty, 1.0, acomp));
+    }
+
+    else if (mealKey === 'cafe_tarde') {
+      const db = MEAL_SLOTS_DB.cafe_tarde;
+      // Escolhe 1 combo único completo (sem misturar crepioca com sanduíche e iogurte!)
+      const combo = db.combos[dayIndex % db.combos.length];
+      const rawSum = combo.items.reduce((acc, it) => acc + it.kcal, 0);
+      const factor = Math.max(0.8, Math.min(2.0, targetKcal / rawSum));
+
+      combo.items.forEach(it => {
+        const itemKcal = Math.round(it.kcal * factor);
+        const itemProt = Number((it.prot * factor).toFixed(1));
+        const itemCarb = Number((it.carb * factor).toFixed(1));
+        const itemFat = Number((it.fat * factor).toFixed(1));
+
+        foods.push({
+          name: it.name,
+          portion: it.unit,
+          scaledPortion: factor > 1.3 ? `${it.unit} (reforçado)` : it.unit,
+          kcal: itemKcal,
+          prot: itemProt,
+          carb: itemCarb,
+          fat: itemFat
+        });
+      });
+    }
+
+    else if (mealKey === 'desjejum') {
+      const db = MEAL_SLOTS_DB.desjejum;
+      const item = db.opcoes[dayIndex % db.opcoes.length];
+      foods.push({
+        name: item.name,
+        portion: item.unit,
+        scaledPortion: item.unit,
+        kcal: item.kcal,
+        prot: item.prot,
+        carb: item.carb,
+        fat: item.fat
+      });
+    }
+
+    else if (mealKey === 'ceia') {
+      const db = MEAL_SLOTS_DB.ceia;
+      const item = db.opcoes[dayIndex % db.opcoes.length];
+      foods.push({
+        name: item.name,
+        portion: item.unit,
+        scaledPortion: item.unit,
+        kcal: item.kcal,
+        prot: item.prot,
+        carb: item.carb,
+        fat: item.fat
+      });
+    }
+
+    return foods;
   }
 
-  // Renderiza as abas dos 7 dias da semana
+  function formatFoodItem(title, unitStr, baseQty, factor, itemRef) {
+    const finalQty = Math.round(baseQty * factor * 10) / 10;
+    const finalKcal = Math.round(itemRef.kcal * factor);
+    const finalProt = Number((itemRef.prot * factor).toFixed(1));
+    const finalCarb = Number((itemRef.carb * factor).toFixed(1));
+    const finalFat = Number((itemRef.fat * factor).toFixed(1));
+
+    let portionText = unitStr;
+    if (unitStr.includes('(')) {
+      portionText = factor > 1.35 ? `${unitStr} [porção reforçada]` : unitStr;
+    } else {
+      portionText = `${finalQty} ${unitStr}`;
+    }
+
+    return {
+      name: title,
+      portion: unitStr,
+      scaledPortion: portionText,
+      kcal: finalKcal,
+      prot: finalProt,
+      carb: finalCarb,
+      fat: finalFat
+    };
+  }
+
   function renderWeeklyTabs() {
     const tabsContainer = document.getElementById('week-days-tabs');
     if (!tabsContainer || !menuState.weeklyPlan) return;
@@ -414,7 +496,6 @@
     });
   }
 
-  // Renderiza o cardápio do dia selecionado
   function renderDayPlan(dayKey) {
     const dayData = menuState.weeklyPlan[dayKey];
     const container = document.getElementById('day-plan-content');
@@ -427,13 +508,13 @@
       <div class="day-summary-header">
         <div>
           <h3>Cardápio para ${dayData.label}</h3>
-          <p>Alinhado com sua meta calórica diária da calculadora</p>
+          <p>Estrutura equilibrada com proteína animal, carboidrato, leguminosa e vegetais</p>
         </div>
         <div class="day-macro-summary">
           <div class="sum-pill kcal"><strong>${dayData.totalKcal}</strong> kcal <span style="font-size: 0.75rem; color: #64748B;">(${diffSign} kcal)</span></div>
-          <div class="sum-pill">Prot: <strong>${dayData.totalProt}g</strong></div>
-          <div class="sum-pill">Carb: <strong>${dayData.totalCarb}g</strong></div>
-          <div class="sum-pill">Gord: <strong>${dayData.totalFat}g</strong></div>
+          <div class="sum-pill">Proteínas: <strong>${dayData.totalProt}g</strong></div>
+          <div class="sum-pill">Carboidratos: <strong>${dayData.totalCarb}g</strong></div>
+          <div class="sum-pill">Gorduras: <strong>${dayData.totalFat}g</strong></div>
         </div>
       </div>
 
@@ -445,7 +526,7 @@
                 <span class="meal-badge-icon">${m.icon}</span>
                 <div>
                   <h5>${m.name}</h5>
-                  <span class="meal-target-sub">Meta da refeição: ~${m.targetKcal} kcal</span>
+                  <span class="meal-target-sub">Alvo da refeição: ~${m.targetKcal} kcal</span>
                 </div>
               </div>
               <div class="meal-total-kcal">${m.actualKcal} kcal</div>
@@ -474,7 +555,6 @@
     `;
   }
 
-  // Gera lista consolidada de compras da semana
   function generateGroceryList() {
     if (!menuState.weeklyPlan) return;
 
@@ -484,10 +564,11 @@
       const day = menuState.weeklyPlan[dayKey];
       day.meals.forEach(meal => {
         meal.foods.forEach(food => {
-          if (!consolidated[food.name]) {
-            consolidated[food.name] = { count: 0, samplePortion: food.portion };
+          const cleanName = food.name.replace(/^[^:]+:\s*/, '');
+          if (!consolidated[cleanName]) {
+            consolidated[cleanName] = { count: 0, samplePortion: food.portion };
           }
-          consolidated[food.name].count += 1;
+          consolidated[cleanName].count += 1;
         });
       });
     });
@@ -498,15 +579,15 @@
 
     listBody.innerHTML = `
       <div style="margin-bottom: 16px;">
-        <p>Itens calculados para cobrir todas as refeições de Segunda a Domingo:</p>
+        <p>Lista consolidada dos ingredientes que você usará nas refeições de Segunda a Domingo:</p>
       </div>
       <div class="grocery-grid-items">
         ${Object.keys(consolidated).map(item => `
           <div class="grocery-item-card">
-            <input type="checkbox" id="item-${item}">
-            <label for="item-${item}">
+            <input type="checkbox" id="item-${item.replace(/\s+/g, '_')}">
+            <label for="item-${item.replace(/\s+/g, '_')}">
               <strong>${item}</strong>
-              <span>Aparece em ${consolidated[item].count} refeições na semana</span>
+              <span>Presente em ${consolidated[item].count} refeições na semana</span>
             </label>
           </div>
         `).join('')}
@@ -517,7 +598,6 @@
   }
 
   function setupEvents() {
-    // Botão Gerar Cardápio
     const btnGenerate = document.getElementById('btn-gerar-cardapio');
     if (btnGenerate) {
       btnGenerate.addEventListener('click', (e) => {
@@ -526,7 +606,6 @@
       });
     }
 
-    // Botão Imprimir / Exportar PDF
     const btnPrint = document.getElementById('btn-imprimir-cardapio');
     if (btnPrint) {
       btnPrint.addEventListener('click', () => {
@@ -534,7 +613,6 @@
       });
     }
 
-    // Botão Lista de Compras
     const btnGrocery = document.getElementById('btn-lista-compras');
     if (btnGrocery) {
       btnGrocery.addEventListener('click', () => {
@@ -542,7 +620,6 @@
       });
     }
 
-    // Modal close
     const btnCloseModal = document.getElementById('btn-close-modal');
     const modal = document.getElementById('grocery-modal');
     if (btnCloseModal && modal) {
@@ -553,45 +630,14 @@
         if (e.target === modal) modal.style.display = 'none';
       });
     }
-
-    // Sincronizar input de calorias se o usuário quiser editar manualmente
-    const inputCustomCalories = document.getElementById('input-target-calories');
-    if (inputCustomCalories) {
-      inputCustomCalories.value = menuState.targetCalories;
-      inputCustomCalories.addEventListener('change', (e) => {
-        const val = parseInt(e.target.value, 10);
-        if (!isNaN(val) && val >= 1000 && val <= 6000) {
-          menuState.targetCalories = val;
-          menuState.macros.carb = Math.round((val * 0.40) / 4);
-          menuState.macros.prot = Math.round((val * 0.35) / 4);
-          menuState.macros.fat = Math.round((val * 0.25) / 9);
-          updateHeaderDisplays();
-        }
-      });
-    }
   }
 
-  function updateHeaderDisplays() {
-    const elKcal = document.getElementById('disp-target-kcal');
-    const elProt = document.getElementById('disp-target-prot');
-    const elCarb = document.getElementById('disp-target-carb');
-    const elFat = document.getElementById('disp-target-fat');
-
-    if (elKcal) elKcal.textContent = menuState.targetCalories.toLocaleString('pt-BR');
-    if (elProt) elProt.textContent = menuState.macros.prot + 'g';
-    if (elCarb) elCarb.textContent = menuState.macros.carb + 'g';
-    if (elFat) elFat.textContent = menuState.macros.fat + 'g';
-  }
-
-  // Inicialização
   document.addEventListener('DOMContentLoaded', () => {
     loadCalculatorData();
     updateHeaderDisplays();
     renderMealCheckboxes();
-    renderFoodPreferences();
+    renderRuleNotice();
     setupEvents();
-    
-    // Auto-gerar para primeira visualização imediata
     generateWeeklyPlan();
   });
 })();
