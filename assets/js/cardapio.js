@@ -445,22 +445,33 @@
   }
 
   function formatFoodItem(title, unitStr, baseQty, factor, itemRef) {
-    const finalQty = Math.round(baseQty * factor * 10) / 10;
+    const finalQty = Math.round(baseQty * factor);
     const finalKcal = Math.round(itemRef.kcal * factor);
     const finalProt = Number((itemRef.prot * factor).toFixed(1));
     const finalCarb = Number((itemRef.carb * factor).toFixed(1));
     const finalFat = Number((itemRef.fat * factor).toFixed(1));
 
-    let portionText = unitStr;
-    if (unitStr.includes('(')) {
-      portionText = factor > 1.35 ? `${unitStr} [porção reforçada]` : unitStr;
+    let portionText = '';
+    if (unitStr.includes('pesados') || unitStr.includes('g pronto') || unitStr === 'g') {
+      const filesAprox = (finalQty / 120).toFixed(1);
+      const descFiles = filesAprox >= 1.5 ? ` (~${filesAprox} filés)` : ' (1 filé médio)';
+      portionText = `${finalQty}g pesados pronto${descFiles}`;
+    } else if (unitStr.includes('unidades')) {
+      portionText = `${Math.max(1, Math.round(finalQty))} unidades`;
+    } else if (unitStr.includes('colheres')) {
+      portionText = `${Math.max(1, Math.round(finalQty))} colheres`;
+    } else if (unitStr.includes('concha')) {
+      const conchas = Number((finalQty).toFixed(1));
+      portionText = `${conchas} concha(s) (~${Math.round(conchas * 100)}g)`;
+    } else if (unitStr.includes('fatia')) {
+      portionText = `${Math.max(1, Math.round(finalQty))} fatia(s)`;
     } else {
       portionText = `${finalQty} ${unitStr}`;
     }
 
     return {
       name: title,
-      portion: unitStr,
+      portion: portionText,
       scaledPortion: portionText,
       kcal: finalKcal,
       prot: finalProt,
