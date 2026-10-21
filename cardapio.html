@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Monte seu Cardápio Semanal Personalizado | J4 Fitness</title>
+  <meta name="description" content="Monte seu cardápio semanal variado e saudável com base no resultado da calculadora de taxa metabólica. Escolha seus alimentos favoritos do dia a dia brasileiro.">
+  <meta name="keywords" content="monte seu cardápio, cardapio semanal emagrecimento, dieta personalizada calorias, cardapio tmb tdee, j4 fitness cardapio">
+  <link rel="canonical" href="https://j4fitnes.5450wp.easypanel.host/cardapio.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Monte seu Cardápio Semanal Personalizado | J4 Fitness">
+  <meta property="og:description" content="Gere uma grade alimentar semanal com os alimentos que você gosta, cobrindo exatamente a sua necessidade calórica.">
+  <meta property="og:image" content="assets/images/blog-macros-nutricao.jpg">
+
+  <!-- Fonts: Plus Jakarta Sans + Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container">
+      <a href="index.html" class="brand" aria-label="J4 Fitness Início">
+        <div class="brand-icon">J4</div>
+        <div>J4 <span>FITNESS</span></div>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html#calculadora" class="nav-link">Calculadora TMB</a></li>
+          <li><a href="cardapio.html" class="nav-link active">Monte seu Cardápio</a></li>
+          <li><a href="index.html#como-funciona" class="nav-link">Como Funciona</a></li>
+          <li><a href="index.html#formulas" class="nav-link">Fórmulas</a></li>
+          <li><a href="blog/index.html" class="nav-link">Blog & Artigos</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="index.html#calculadora" class="btn-pill" style="background: var(--bg-subtle); color: var(--text-body); border: 1px solid var(--border-card); box-shadow: none;">
+          ← Voltar à Calculadora
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main style="padding-top: 95px; padding-bottom: 70px;">
+    <div class="container">
+
+      <!-- Top Target Banner -->
+      <div class="cardapio-target-banner">
+        <div class="banner-left">
+          <span class="badge-clean" style="margin-bottom: 6px;">Sua Meta Nutricional</span>
+          <h2>Planejamento Alimentar Personalizado</h2>
+          <p>O cardápio será calibrado para suprir exatamente as necessidades de calorias e macronutrientes da calculadora.</p>
+        </div>
+
+        <div class="banner-stats-row">
+          <div class="target-pill-card">
+            <span class="sub-label">Alvo Calórico Diário</span>
+            <div id="disp-target-kcal" class="main-val">2.599</div>
+            <span style="font-size: 0.72rem; color: var(--text-muted);">kcal / dia</span>
+          </div>
+
+          <div class="target-pill-card" style="display: flex; gap: 12px; align-items: center;">
+            <div>
+              <span class="sub-label">Proteínas</span>
+              <div id="disp-target-prot" style="font-family: var(--font-mono); font-weight: 700; color: #4338CA;">195g</div>
+            </div>
+            <div>
+              <span class="sub-label">Carboidratos</span>
+              <div id="disp-target-carb" style="font-family: var(--font-mono); font-weight: 700; color: #0284C7;">260g</div>
+            </div>
+            <div>
+              <span class="sub-label">Gorduras</span>
+              <div id="disp-target-fat" style="font-family: var(--font-mono); font-weight: 700; color: #D97706;">72g</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 1: Quantas refeições você faz ao dia? -->
+      <section class="wizard-step-card">
+        <div class="wizard-step-header">
+          <span class="badge-clean" style="margin-bottom: 6px;">Etapa 1 de 2</span>
+          <h3>Quantas refeições você costuma fazer ao dia?</h3>
+          <p>Selecione os horários que fazem parte da sua rotina habitual (clique para marcar ou desmarcar):</p>
+        </div>
+
+        <div class="meal-select-grid" id="meal-selection-grid">
+          <!-- Renderizado via JavaScript com Desjejum, Café da Manhã, Almoço, Café da Tarde, Jantar, Ceia -->
+        </div>
+      </section>
+
+      <!-- Step 2: Quais alimentos você gosta em cada refeição? -->
+      <section class="wizard-step-card">
+        <div class="wizard-step-header">
+          <span class="badge-clean" style="margin-bottom: 6px;">Etapa 2 de 2</span>
+          <h3>Quais alimentos você gosta em cada horário?</h3>
+          <p>Selecionamos opções nutritivas e comuns na mesa dos brasileiros. Marque as que você prefere consumir:</p>
+        </div>
+
+        <div id="food-preferences-container">
+          <!-- Renderizado dinamicamente por refeição ativa com alimentos saudáveis brasileiros -->
+        </div>
+
+        <div class="generate-action-bar">
+          <button type="button" id="btn-gerar-cardapio" class="btn-large-generate">
+            <span>🥗 Gerar Meu Cardápio Semanal Variado</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Step 3: Cardápio Semanal Variado Gerado -->
+      <section id="cardapio-resultado-wrapper" style="display: none; margin-top: 36px;">
+        <div class="section-center-head" style="text-align: left; margin-bottom: 20px;">
+          <span class="badge-clean">Seu Plano Semanal Pronto</span>
+          <h2 style="font-size: 1.8rem; margin: 8px 0 4px;">Grade Alimentar Semanal (Segunda a Domingo)</h2>
+          <p>Cardápio equilibrado com porções calculadas para cobrir suas necessidades energéticas diárias.</p>
+        </div>
+
+        <!-- 7 Days Tabs -->
+        <div class="week-tabs-container" id="week-days-tabs">
+          <!-- Abas dos 7 dias renderizadas via JS -->
+        </div>
+
+        <!-- Day Plan View -->
+        <div id="day-plan-content">
+          <!-- Linhas de refeições e alimentos calculados do dia selecionado -->
+        </div>
+
+        <!-- Plan Bottom Actions -->
+        <div class="plan-actions-bar">
+          <button type="button" id="btn-lista-compras" class="btn-pill" style="background: #FFFFFF; color: var(--text-main); border: 1px solid var(--border-card);">
+            🛒 Ver Lista de Compras da Semana
+          </button>
+          <button type="button" id="btn-imprimir-cardapio" class="btn-pill">
+            📄 Imprimir / Exportar Cardápio em PDF
+          </button>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Modal Lista de Compras -->
+  <div id="grocery-modal" class="grocery-modal-backdrop">
+    <div class="grocery-modal-box">
+      <div class="grocery-modal-head">
+        <h3>🛒 Lista de Compras Semanal</h3>
+        <button type="button" id="btn-close-modal" style="background:none; border:none; font-size: 1.4rem; cursor:pointer; color: var(--text-muted);">×</button>
+      </div>
+      <div class="grocery-modal-body" id="grocery-list-body">
+        <!-- Itens consolidados para feira e supermercado -->
+      </div>
+      <div class="grocery-modal-footer">
+        <button type="button" onclick="window.print()" class="btn-pill" style="padding: 8px 16px; font-size: 0.85rem;">
+          Imprimir Lista
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Clean -->
+  <footer class="footer-clean">
+    <div class="container">
+      <div class="footer-copy">
+        <p>© 2026 J4 Fitness. Cardápio gerado com base nas tabelas de composição de alimentos brasileiras (TACO / IBGE).</p>
+        <a href="index.html" style="color: var(--primary); font-weight: 600;">← Voltar para a Calculadora Principal</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script do Cardápio -->
+  <script src="assets/js/cardapio.js"></script>
+</body>
+</html>

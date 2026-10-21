@@ -12,6 +12,12 @@
     </image:image>
   </url>
   <url>
+    <loc>https://j4fitnes.com.br/cardapio.html</loc>
+    <lastmod>2026-10-21</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
     <loc>https://j4fitnes.com.br/blog/</loc>
     <lastmod>2026-10-21</lastmod>
     <changefreq>weekly</changefreq>

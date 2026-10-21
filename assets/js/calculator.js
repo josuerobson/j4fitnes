@@ -172,6 +172,17 @@
       const targetOffset = maxOffset - (ratio * (maxOffset * 0.75));
       el.gaugeCircle.style.strokeDashoffset = targetOffset;
     }
+
+    // Sincroniza com localStorage para o gerador de cardápio
+    try {
+      localStorage.setItem('j4fitness_user_metrics', JSON.stringify({
+        bmr,
+        tdee,
+        targetCalories,
+        macros: { carb: carbG, prot: protG, fat: fatG },
+        state
+      }));
+    } catch (e) {}
   }
 
   function setupEventListeners() {
