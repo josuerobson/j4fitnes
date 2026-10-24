@@ -762,7 +762,7 @@
     ]
   };
 
-  // Mapeamento de Mídias de Demonstração (Imagens e Vídeos)
+  // Mapeamento de Mídias de Demonstração (Imagens e Vídeos com Atletas Reais e IA)
   const MEDIA_ASSETS = {
     agachamento_livre: {
       masculino: {
@@ -896,132 +896,132 @@
     },
     puxada_alta_pulley: {
       masculino: {
-        frontal: { img: 'assets/images/treino-puxada_alta.jpg', video: 'assets/videos/demo_puxada_alta.mp4' },
-        lateral: { img: 'assets/images/treino-puxada_alta.jpg', video: 'assets/videos/demo_puxada_alta.mp4' }
+        frontal: { img: 'assets/images/real_pull_ups.jpg', video: 'assets/videos/real_pull_ups.mp4' },
+        lateral: { img: 'assets/images/real_pull_ups.jpg', video: 'assets/videos/real_pull_ups.mp4' }
       },
       feminino: {
-        frontal: { img: 'assets/images/treino-puxada_alta.jpg', video: 'assets/videos/demo_puxada_alta.mp4' },
-        lateral: { img: 'assets/images/treino-puxada_alta.jpg', video: 'assets/videos/demo_puxada_alta.mp4' }
+        frontal: { img: 'assets/images/real_pull_ups.jpg', video: 'assets/videos/real_pull_ups.mp4' },
+        lateral: { img: 'assets/images/real_pull_ups.jpg', video: 'assets/videos/real_pull_ups.mp4' }
       }
     },
     barra_fixa_ou_invertida_casa: {
       masculino: {
-        frontal: { img: 'assets/images/treino-puxada_alta.jpg', video: 'assets/videos/demo_puxada_alta.mp4' },
-        lateral: { img: 'assets/images/treino-puxada_alta.jpg', video: 'assets/videos/demo_puxada_alta.mp4' }
+        frontal: { img: 'assets/images/real_pull_ups.jpg', video: 'assets/videos/real_pull_ups.mp4' },
+        lateral: { img: 'assets/images/real_pull_ups.jpg', video: 'assets/videos/real_pull_ups.mp4' }
       },
       feminino: {
-        frontal: { img: 'assets/images/treino-puxada_alta.jpg', video: 'assets/videos/demo_puxada_alta.mp4' },
-        lateral: { img: 'assets/images/treino-puxada_alta.jpg', video: 'assets/videos/demo_puxada_alta.mp4' }
+        frontal: { img: 'assets/images/real_pull_ups.jpg', video: 'assets/videos/real_pull_ups.mp4' },
+        lateral: { img: 'assets/images/real_pull_ups.jpg', video: 'assets/videos/real_pull_ups.mp4' }
       }
     },
     remada_curvada_halteres: {
       masculino: {
-        frontal: { img: 'assets/images/treino-remada_curvada.jpg', video: 'assets/videos/demo_remada_curvada.mp4' },
-        lateral: { img: 'assets/images/treino-remada_curvada.jpg', video: 'assets/videos/demo_remada_curvada.mp4' }
+        frontal: { img: 'assets/images/real_bent_row.jpg', video: 'assets/videos/real_bent_row.mp4' },
+        lateral: { img: 'assets/images/real_bent_row.jpg', video: 'assets/videos/real_bent_row.mp4' }
       },
       feminino: {
-        frontal: { img: 'assets/images/treino-remada_curvada.jpg', video: 'assets/videos/demo_remada_curvada.mp4' },
-        lateral: { img: 'assets/images/treino-remada_curvada.jpg', video: 'assets/videos/demo_remada_curvada.mp4' }
+        frontal: { img: 'assets/images/real_bent_row.jpg', video: 'assets/videos/real_bent_row.mp4' },
+        lateral: { img: 'assets/images/real_bent_row.jpg', video: 'assets/videos/real_bent_row.mp4' }
       }
     },
     remada_unilateral_serrote: {
       masculino: {
-        frontal: { img: 'assets/images/treino-remada_curvada.jpg', video: 'assets/videos/demo_remada_curvada.mp4' },
-        lateral: { img: 'assets/images/treino-remada_curvada.jpg', video: 'assets/videos/demo_remada_curvada.mp4' }
+        frontal: { img: 'assets/images/real_bent_row.jpg', video: 'assets/videos/real_bent_row.mp4' },
+        lateral: { img: 'assets/images/real_bent_row.jpg', video: 'assets/videos/real_bent_row.mp4' }
       },
       feminino: {
-        frontal: { img: 'assets/images/treino-remada_curvada.jpg', video: 'assets/videos/demo_remada_curvada.mp4' },
-        lateral: { img: 'assets/images/treino-remada_curvada.jpg', video: 'assets/videos/demo_remada_curvada.mp4' }
+        frontal: { img: 'assets/images/real_bent_row.jpg', video: 'assets/videos/real_bent_row.mp4' },
+        lateral: { img: 'assets/images/real_bent_row.jpg', video: 'assets/videos/real_bent_row.mp4' }
       }
     },
     desenvolvimento_halteres: {
       masculino: {
-        frontal: { img: 'assets/images/treino-desenvolvimento_ombros.jpg', video: 'assets/videos/demo_desenvolvimento_ombros.mp4' },
-        lateral: { img: 'assets/images/treino-desenvolvimento_ombros.jpg', video: 'assets/videos/demo_desenvolvimento_ombros.mp4' }
+        frontal: { img: 'assets/images/real_shoulder_press.jpg', video: 'assets/videos/real_shoulder_press.mp4' },
+        lateral: { img: 'assets/images/real_shoulder_press.jpg', video: 'assets/videos/real_shoulder_press.mp4' }
       },
       feminino: {
-        frontal: { img: 'assets/images/treino-desenvolvimento_ombros.jpg', video: 'assets/videos/demo_desenvolvimento_ombros.mp4' },
-        lateral: { img: 'assets/images/treino-desenvolvimento_ombros.jpg', video: 'assets/videos/demo_desenvolvimento_ombros.mp4' }
+        frontal: { img: 'assets/images/real_shoulder_press.jpg', video: 'assets/videos/real_shoulder_press.mp4' },
+        lateral: { img: 'assets/images/real_shoulder_press.jpg', video: 'assets/videos/real_shoulder_press.mp4' }
       }
     },
     flexao_pike_casa: {
       masculino: {
-        frontal: { img: 'assets/images/treino-desenvolvimento_ombros.jpg', video: 'assets/videos/demo_desenvolvimento_ombros.mp4' },
-        lateral: { img: 'assets/images/treino-desenvolvimento_ombros.jpg', video: 'assets/videos/demo_desenvolvimento_ombros.mp4' }
+        frontal: { img: 'assets/images/real_shoulder_press.jpg', video: 'assets/videos/real_shoulder_press.mp4' },
+        lateral: { img: 'assets/images/real_shoulder_press.jpg', video: 'assets/videos/real_shoulder_press.mp4' }
       },
       feminino: {
-        frontal: { img: 'assets/images/treino-desenvolvimento_ombros.jpg', video: 'assets/videos/demo_desenvolvimento_ombros.mp4' },
-        lateral: { img: 'assets/images/treino-desenvolvimento_ombros.jpg', video: 'assets/videos/demo_desenvolvimento_ombros.mp4' }
+        frontal: { img: 'assets/images/real_shoulder_press.jpg', video: 'assets/videos/real_shoulder_press.mp4' },
+        lateral: { img: 'assets/images/real_shoulder_press.jpg', video: 'assets/videos/real_shoulder_press.mp4' }
       }
     },
     elevacao_lateral: {
       masculino: {
-        frontal: { img: 'assets/images/treino-elevacao_lateral.jpg', video: 'assets/videos/demo_elevacao_lateral.mp4' },
-        lateral: { img: 'assets/images/treino-elevacao_lateral.jpg', video: 'assets/videos/demo_elevacao_lateral.mp4' }
+        frontal: { img: 'assets/images/real_shoulder_press.jpg', video: 'assets/videos/real_shoulder_press.mp4' },
+        lateral: { img: 'assets/images/real_shoulder_press.jpg', video: 'assets/videos/real_shoulder_press.mp4' }
       },
       feminino: {
-        frontal: { img: 'assets/images/treino-elevacao_lateral.jpg', video: 'assets/videos/demo_elevacao_lateral.mp4' },
-        lateral: { img: 'assets/images/treino-elevacao_lateral.jpg', video: 'assets/videos/demo_elevacao_lateral.mp4' }
+        frontal: { img: 'assets/images/real_shoulder_press.jpg', video: 'assets/videos/real_shoulder_press.mp4' },
+        lateral: { img: 'assets/images/real_shoulder_press.jpg', video: 'assets/videos/real_shoulder_press.mp4' }
       }
     },
     triceps_corda_polia: {
       masculino: {
-        frontal: { img: 'assets/images/treino-triceps_corda.jpg', video: 'assets/videos/demo_triceps_corda.mp4' },
-        lateral: { img: 'assets/images/treino-triceps_corda.jpg', video: 'assets/videos/demo_triceps_corda.mp4' }
+        frontal: { img: 'assets/images/real_triceps.jpg', video: 'assets/videos/real_triceps.mp4' },
+        lateral: { img: 'assets/images/real_triceps.jpg', video: 'assets/videos/real_triceps.mp4' }
       },
       feminino: {
-        frontal: { img: 'assets/images/treino-triceps_corda.jpg', video: 'assets/videos/demo_triceps_corda.mp4' },
-        lateral: { img: 'assets/images/treino-triceps_corda.jpg', video: 'assets/videos/demo_triceps_corda.mp4' }
+        frontal: { img: 'assets/images/real_triceps.jpg', video: 'assets/videos/real_triceps.mp4' },
+        lateral: { img: 'assets/images/real_triceps.jpg', video: 'assets/videos/real_triceps.mp4' }
       }
     },
     triceps_banco_casa: {
       masculino: {
-        frontal: { img: 'assets/images/treino-triceps_corda.jpg', video: 'assets/videos/demo_triceps_corda.mp4' },
-        lateral: { img: 'assets/images/treino-triceps_corda.jpg', video: 'assets/videos/demo_triceps_corda.mp4' }
+        frontal: { img: 'assets/images/real_triceps.jpg', video: 'assets/videos/real_triceps.mp4' },
+        lateral: { img: 'assets/images/real_triceps.jpg', video: 'assets/videos/real_triceps.mp4' }
       },
       feminino: {
-        frontal: { img: 'assets/images/treino-triceps_corda.jpg', video: 'assets/videos/demo_triceps_corda.mp4' },
-        lateral: { img: 'assets/images/treino-triceps_corda.jpg', video: 'assets/videos/demo_triceps_corda.mp4' }
+        frontal: { img: 'assets/images/real_triceps.jpg', video: 'assets/videos/real_triceps.mp4' },
+        lateral: { img: 'assets/images/real_triceps.jpg', video: 'assets/videos/real_triceps.mp4' }
       }
     },
     rosca_direta_halteres: {
       masculino: {
-        frontal: { img: 'assets/images/treino-rosca_direta.jpg', video: 'assets/videos/demo_rosca_direta.mp4' },
-        lateral: { img: 'assets/images/treino-rosca_direta.jpg', video: 'assets/videos/demo_rosca_direta.mp4' }
+        frontal: { img: 'assets/images/real_biceps_curl.jpg', video: 'assets/videos/real_biceps_curl.mp4' },
+        lateral: { img: 'assets/images/real_biceps_curl.jpg', video: 'assets/videos/real_biceps_curl.mp4' }
       },
       feminino: {
-        frontal: { img: 'assets/images/treino-rosca_direta.jpg', video: 'assets/videos/demo_rosca_direta.mp4' },
-        lateral: { img: 'assets/images/treino-rosca_direta.jpg', video: 'assets/videos/demo_rosca_direta.mp4' }
+        frontal: { img: 'assets/images/real_biceps_curl.jpg', video: 'assets/videos/real_biceps_curl.mp4' },
+        lateral: { img: 'assets/images/real_biceps_curl.jpg', video: 'assets/videos/real_biceps_curl.mp4' }
       }
     },
     leg_press_45: {
       masculino: {
-        frontal: { img: 'assets/images/treino-leg_press_45.jpg', video: 'assets/videos/demo_leg_press_45.mp4' },
-        lateral: { img: 'assets/images/treino-leg_press_45.jpg', video: 'assets/videos/demo_leg_press_45.mp4' }
+        frontal: { img: 'assets/images/real_leg_press.jpg', video: 'assets/videos/real_leg_press.mp4' },
+        lateral: { img: 'assets/images/real_leg_press.jpg', video: 'assets/videos/real_leg_press.mp4' }
       },
       feminino: {
-        frontal: { img: 'assets/images/treino-leg_press_45.jpg', video: 'assets/videos/demo_leg_press_45.mp4' },
-        lateral: { img: 'assets/images/treino-leg_press_45.jpg', video: 'assets/videos/demo_leg_press_45.mp4' }
+        frontal: { img: 'assets/images/real_leg_press.jpg', video: 'assets/videos/real_leg_press.mp4' },
+        lateral: { img: 'assets/images/real_leg_press.jpg', video: 'assets/videos/real_leg_press.mp4' }
       }
     },
     abdominal_infra_solo: {
       masculino: {
-        frontal: { img: 'assets/images/treino-abdominal_infra.jpg', video: 'assets/videos/demo_abdominal_infra.mp4' },
-        lateral: { img: 'assets/images/treino-abdominal_infra.jpg', video: 'assets/videos/demo_abdominal_infra.mp4' }
+        frontal: { img: 'assets/images/real_leg_raises.jpg', video: 'assets/videos/real_leg_raises.mp4' },
+        lateral: { img: 'assets/images/real_leg_raises.jpg', video: 'assets/videos/real_leg_raises.mp4' }
       },
       feminino: {
-        frontal: { img: 'assets/images/treino-abdominal_infra.jpg', video: 'assets/videos/demo_abdominal_infra.mp4' },
-        lateral: { img: 'assets/images/treino-abdominal_infra.jpg', video: 'assets/videos/demo_abdominal_infra.mp4' }
+        frontal: { img: 'assets/images/real_leg_raises.jpg', video: 'assets/videos/real_leg_raises.mp4' },
+        lateral: { img: 'assets/images/real_leg_raises.jpg', video: 'assets/videos/real_leg_raises.mp4' }
       }
     },
     panturrilha_em_pe: {
       masculino: {
-        frontal: { img: 'assets/images/treino-panturrilha_em_pe.jpg', video: 'assets/videos/demo_panturrilha_em_pe.mp4' },
-        lateral: { img: 'assets/images/treino-panturrilha_em_pe.jpg', video: 'assets/videos/demo_panturrilha_em_pe.mp4' }
+        frontal: { img: 'assets/images/treino-homem-agachamento-frente.jpg', video: 'assets/videos/homem_agachamento_lado.mp4' },
+        lateral: { img: 'assets/images/treino-homem-agachamento-lado.jpg', video: 'assets/videos/homem_agachamento_lado.mp4' }
       },
       feminino: {
-        frontal: { img: 'assets/images/treino-panturrilha_em_pe.jpg', video: 'assets/videos/demo_panturrilha_em_pe.mp4' },
-        lateral: { img: 'assets/images/treino-panturrilha_em_pe.jpg', video: 'assets/videos/demo_panturrilha_em_pe.mp4' }
+        frontal: { img: 'assets/images/treino-mulher-agachamento-frente.jpg', video: 'assets/videos/mulher_afundo_lado.mp4' },
+        lateral: { img: 'assets/images/treino-mulher-afundo-lado.jpg', video: 'assets/videos/mulher_afundo_lado.mp4' }
       }
     }
   };
