@@ -56,12 +56,28 @@ EXERCISES_MAP = [
         "phase_3": "Retracao Controlada"
     },
     {
+        "id": "homem_supino_frente",
+        "image": "treino-homem-supino-frente.jpg",
+        "angle_name": "VISAO FRONTAL - SUPINO COM HALTERES",
+        "phase_1": "Descida dos Halteres",
+        "phase_2": "Cotovelos em 45",
+        "phase_3": "Empuxo no Topo"
+    },
+    {
         "id": "homem_supino_lado",
         "image": "treino-homem-supino-lado.jpg",
-        "angle_name": "VISAO LATERAL - SUPINO",
+        "angle_name": "VISAO LATERAL - SUPINO COM HALTERES",
         "phase_1": "Descida Cotovelos 45",
         "phase_2": "Alongamento Peitoral",
         "phase_3": "Empuxo e Concentracao"
+    },
+    {
+        "id": "mulher_supino_lado",
+        "image": "treino-mulher-supino-lado.jpg",
+        "angle_name": "VISAO LATERAL - SUPINO FEMININO",
+        "phase_1": "Escapulas Retraidas",
+        "phase_2": "Linha Media do Peito",
+        "phase_3": "Extensao com Controle"
     },
     {
         "id": "mulher_afundo_lado",
@@ -70,6 +86,30 @@ EXERCISES_MAP = [
         "phase_1": "Descida em 90",
         "phase_2": "Equilibrio Pelvico",
         "phase_3": "Subida Unilateral"
+    },
+    {
+        "id": "homem_stiff_lado",
+        "image": "treino-homem-stiff-lado.jpg",
+        "angle_name": "VISAO LATERAL - STIFF / RDL HOMEM",
+        "phase_1": "Quadril para Tras",
+        "phase_2": "Alongamento Isquiotibiais",
+        "phase_3": "Contracao de Gluteos"
+    },
+    {
+        "id": "mulher_stiff_lado",
+        "image": "treino-mulher-stiff-lado.jpg",
+        "angle_name": "VISAO LATERAL - STIFF / RDL MULHER",
+        "phase_1": "Coluna 100% Neutra",
+        "phase_2": "Halteres Rentes a Perna",
+        "phase_3": "Pico de Gluteos no Topo"
+    },
+    {
+        "id": "homem_prancha_lado",
+        "image": "treino-homem-prancha-lado.jpg",
+        "angle_name": "VISAO LATERAL - PRANCHA ISOMETRICA",
+        "phase_1": "Ativacao de Transverso",
+        "phase_2": "Linha Reta Nuca-Calcanhar",
+        "phase_3": "Sustentacao Estavel"
     }
 ]
 
