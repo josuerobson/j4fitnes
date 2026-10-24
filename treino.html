@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Monte seu Treino Personalizado com Demonstrações em Vídeo IA | J4 Fitness</title>
+  <meta name="description" content="Monte sua ficha de treino semanal personalizada para academia ou em casa (calistenia). Escolha seus dias, objetivo e gênero com demonstração de exercícios em vídeo gravados por IA em 2 ângulos.">
+  <meta name="keywords" content="monte seu treino, treino academia personalizado, ficha de treino semanal, treino calistenia em casa, exercicios com video 2 angulos, j4 fitness treino">
+  <link rel="canonical" href="https://j4fitnes.5450wp.easypanel.host/treino.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Monte seu Treino Personalizado com Vídeos IA em 2 Ângulos | J4 Fitness">
+  <meta property="og:description" content="Divisões biomecânicas personalizadas para homens e mulheres. Academia ou calistenia em casa com demonstrações visuais em múltiplos ângulos.">
+  <meta property="og:image" content="assets/images/hero-fitness.jpg">
+
+  <!-- Fonts: Plus Jakarta Sans + Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container">
+      <a href="index.html" class="brand" aria-label="J4 Fitness Início">
+        <div class="brand-icon">J4</div>
+        <div>J4 <span>FITNESS</span></div>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="index.html#calculadora" class="nav-link">Calculadora TMB</a></li>
+          <li><a href="cardapio.html" class="nav-link">Monte seu Cardápio</a></li>
+          <li><a href="treino.html" class="nav-link active">Monte seu Treino</a></li>
+          <li><a href="index.html#como-funciona" class="nav-link">Como Funciona</a></li>
+          <li><a href="index.html#formulas" class="nav-link">Fórmulas</a></li>
+          <li><a href="blog/index.html" class="nav-link">Blog & Artigos</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="index.html#calculadora" class="btn-pill" style="background: var(--bg-subtle); color: var(--text-body); border: 1px solid var(--border-card); box-shadow: none;">
+          ← Calculadora TMB
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main style="padding: 40px 0 80px;">
+    <div class="container">
+
+      <!-- Breadcrumbs -->
+      <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 20px;">
+        <a href="index.html" style="color: var(--text-muted); text-decoration: none;">Início</a>
+        <span style="margin: 0 6px;">/</span>
+        <span style="color: var(--text-main); font-weight: 600;">Monte seu Treino Personalizado</span>
+      </div>
+
+      <!-- Hero Banner -->
+      <section class="workout-hero-banner">
+        <div style="max-width: 720px;">
+          <div class="workout-hero-badge">
+            ⚡ Prescrição Biomecânica Científica + Vídeos IA
+          </div>
+          <h1 style="font-size: 2.1rem; font-weight: 800; color: var(--text-main); margin-bottom: 12px; line-height: 1.2;">
+            Monte seu <span style="color: var(--primary);">Treino Semanal Inteligente</span>
+          </h1>
+          <p style="font-size: 0.95rem; color: var(--text-body); line-height: 1.5; margin-bottom: 18px;">
+            Estruture uma rotina eficiente adaptada aos seus dias disponíveis, seja para <strong>treinar na academia com pesos</strong> ou <strong>em casa sem equipamentos (calistenia)</strong>. Visualize cada movimento com <strong>vídeos gerados por IA demonstrando a técnica correta em 2 ângulos</strong> (frontal e lateral) para homens e mulheres.
+          </p>
+          <div style="display: flex; gap: 14px; flex-wrap: wrap; font-size: 0.82rem; color: var(--text-muted);">
+            <span>✓ Atletas IA Masculinos e Femininos</span>
+            <span>•</span>
+            <span>✓ Visão Frontal & Lateral Sincronizada</span>
+            <span>•</span>
+            <span>✓ Periodização e Descanso Inteligente</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Wizard de Configuração -->
+      <section class="calc-card" style="margin-bottom: 36px; padding: 32px 28px;">
+        
+        <!-- Passo 1: Gênero / Perfil Biomecânico -->
+        <div class="wizard-step-box">
+          <div class="wizard-section-title">
+            <span style="color: var(--primary);">01.</span> Escolha seu Gênero Biomecânico
+          </div>
+          <p class="wizard-section-subtitle">
+            O algoritmo ajusta a distribuição dos grupos musculares (ênfase em cadeia posterior/glúteos para mulheres ou tronco/membros superiores para homens) e define os atores de IA nos vídeos de demonstração.
+          </p>
+
+          <div class="selection-grid-2">
+            <div class="card-select-btn active" data-gender="masculino" id="btn-gender-masc">
+              <div class="card-select-icon">👨</div>
+              <div class="card-select-info">
+                <h4>Masculino</h4>
+                <p>Ênfase proporcional em peitoral, costas (tronco em V), braços, deltóides e pernas completas.</p>
+              </div>
+              <div class="card-select-badge">✓</div>
+            </div>
+
+            <div class="card-select-btn" data-gender="feminino" id="btn-gender-fem">
+              <div class="card-select-icon">👩</div>
+              <div class="card-select-info">
+                <h4>Feminino</h4>
+                <p>Otimização com foco prioritário em glúteos, quadríceps, posteriores, core e membros superiores tonificados.</p>
+              </div>
+              <div class="card-select-badge">✓</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Passo 2: Objetivo Principal -->
+        <div class="wizard-step-box">
+          <div class="wizard-section-title">
+            <span style="color: var(--primary);">02.</span> Qual é o seu Objetivo Principal?
+          </div>
+          <p class="wizard-section-subtitle">
+            Define a faixa de repetições, tempo de descanso entre séries, cadência e densidade de esforço.
+          </p>
+
+          <div class="objectives-grid" id="objectives-container">
+            <!-- Renderizado dinamicamente ou estático via JS -->
+          </div>
+        </div>
+
+        <!-- Passo 3: Onde Você Vai Treinar? -->
+        <div class="wizard-step-box">
+          <div class="wizard-section-title">
+            <span style="color: var(--primary);">03.</span> Onde Você Pretende Treinar?
+          </div>
+          <p class="wizard-section-subtitle">
+            Selecione entre musculação tradicional ou calistenia funcional com peso corporal.
+          </p>
+
+          <div class="selection-grid-2">
+            <div class="card-select-btn active" data-environment="academia" id="btn-env-academia">
+              <div class="card-select-icon">🏢</div>
+              <div class="card-select-info">
+                <h4>Academia Completa</h4>
+                <p>Treino de força com halteres, barras, máquinas articuladas, polias e sobrecarga progressiva.</p>
+              </div>
+              <div class="card-select-badge">✓</div>
+            </div>
+
+            <div class="card-select-btn" data-environment="casa" id="btn-env-casa">
+              <div class="card-select-icon">🏡</div>
+              <div class="card-select-info">
+                <h4>Em Casa / Calistenia</h4>
+                <p>Exercícios 100% sem equipamentos ou usando apenas o peso corporal, solo e apoios domésticos seguros.</p>
+              </div>
+              <div class="card-select-badge">✓</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Passo 4: Dias da Semana e Frequência -->
+        <div class="wizard-step-box">
+          <div class="wizard-section-title">
+            <span style="color: var(--primary);">04.</span> Quais Dias da Semana Você Vai Treinar?
+          </div>
+          <p class="wizard-section-subtitle">
+            Marque os dias exatos em que você tem disponibilidade. O algoritmo montará a divisão ideal (Full Body, Upper/Lower, Push/Pull/Legs) respeitando os períodos de recuperação muscular.
+          </p>
+
+          <div class="days-selector-container">
+            <div class="days-pills-row" id="days-pills-row">
+              <button type="button" class="day-pill-btn active" data-day="seg">
+                <strong>SEG</strong>
+                <span>Segunda</span>
+              </button>
+              <button type="button" class="day-pill-btn" data-day="ter">
+                <strong>TER</strong>
+                <span>Terça</span>
+              </button>
+              <button type="button" class="day-pill-btn active" data-day="qua">
+                <strong>QUA</strong>
+                <span>Quarta</span>
+              </button>
+              <button type="button" class="day-pill-btn" data-day="qui">
+                <strong>QUI</strong>
+                <span>Quinta</span>
+              </button>
+              <button type="button" class="day-pill-btn active" data-day="sex">
+                <strong>SEX</strong>
+                <span>Sexta</span>
+              </button>
+              <button type="button" class="day-pill-btn" data-day="sab">
+                <strong>SÁB</strong>
+                <span>Sábado</span>
+              </button>
+              <button type="button" class="day-pill-btn" data-day="dom">
+                <strong>DOM</strong>
+                <span>Domingo</span>
+              </button>
+            </div>
+
+            <div class="frequency-feedback-banner" id="frequency-banner">
+              <div>
+                <strong>3 dias selecionados:</strong> Divisão Full Body Alternada (Seg, Qua, Sex) com descanso nos dias intermediários.
+              </div>
+              <span style="font-weight: 700; color: var(--primary);">Frequência Recomendada</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA Gerar Treino -->
+        <div style="text-align: center; margin-top: 10px;">
+          <button type="button" id="btn-gerar-treino" class="btn-pill" style="padding: 14px 36px; font-size: 1rem; width: 100%; max-width: 360px;">
+            ⚡ Gerar Minha Ficha de Treino
+          </button>
+        </div>
+
+      </section>
+
+      <!-- Grade do Treino Semanal Gerado -->
+      <section id="workout-results-section" style="scroll-margin-top: 80px;">
+        
+        <!-- Header do Plano -->
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; margin-bottom: 20px;">
+          <div>
+            <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--text-main); margin-bottom: 4px;">
+              Sua Programação Semanal de Treinos
+            </h2>
+            <p id="plan-meta-summary" style="font-size: 0.85rem; color: var(--text-muted);">
+              Calculado para Perfil Masculino • Hipertrofia • Academia • 3 Dias na Semana
+            </p>
+          </div>
+
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button type="button" id="btn-copy-workout-zap" class="btn-pill" style="background: #25D366; color: #FFFFFF; border: none; font-size: 0.82rem; padding: 8px 16px;">
+              💬 Copiar para WhatsApp
+            </button>
+            <button type="button" id="btn-print-workout" class="btn-pill" style="background: #FFFFFF; color: var(--text-main); border: 1px solid var(--border-card); font-size: 0.82rem; padding: 8px 16px;">
+              📄 Imprimir Ficha
+            </button>
+          </div>
+        </div>
+
+        <!-- Abas de Navegação dos Dias -->
+        <div class="plan-tabs-row" id="workout-days-tabs">
+          <!-- Gerado via JS: Segunda, Terça, Quarta... + Visão Geral -->
+        </div>
+
+        <!-- Conteúdo do Dia Selecionado -->
+        <div id="workout-day-content">
+          <!-- Renderizado dinamicamente -->
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Modal de Demonstração em Vídeo com IA (Dois Ângulos) -->
+  <div id="video-demo-modal" class="video-modal-backdrop">
+    <div class="video-modal-box">
+      <div class="video-modal-head">
+        <div>
+          <span style="font-size: 0.72rem; font-weight: 800; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px;">Demonstração Técnica em Vídeo</span>
+          <h3 id="modal-exercise-title">Agachamento Livre com Barra</h3>
+        </div>
+        <button type="button" id="btn-close-video-modal" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-muted);">&times;</button>
+      </div>
+
+      <div class="video-modal-body">
+        
+        <!-- Controles de Ângulo e Alternância de Ator -->
+        <div class="video-control-row">
+          <div class="angle-tabs-group" id="angle-tabs-container">
+            <button type="button" class="angle-tab-btn active" data-angle="frontal">
+              🎥 Visão Frontal
+            </button>
+            <button type="button" class="angle-tab-btn" data-angle="lateral">
+              🎥 Visão Lateral (90°)
+            </button>
+            <button type="button" class="angle-tab-btn" data-angle="dual">
+              🔀 Tela Dividida (2 Ângulos)
+            </button>
+          </div>
+
+          <button type="button" class="athlete-switch-btn" id="btn-toggle-modal-athlete">
+            <span id="modal-athlete-icon">👨</span>
+            <span id="modal-athlete-text">Ver Atleta Feminina</span>
+          </button>
+        </div>
+
+        <!-- Palco do Vídeo / Dois Ângulos -->
+        <div class="video-stage-container">
+          <div class="video-screen-grid" id="video-screen-grid">
+            <!-- Viewport Frontal -->
+            <div class="video-viewport" id="viewport-frontal">
+              <span class="video-angle-watermark">ÂNGULO FRONTAL (FRONT VIEW)</span>
+              <span class="video-actor-tag" id="actor-badge-frontal">Ator IA • Perfil Atlético</span>
+              <video id="video-player-frontal" playsinline autoplay loop muted style="width: 100%; height: 100%; object-fit: cover; display: block;"></video>
+              <img id="img-video-frontal" src="assets/images/hero-fitness.jpg" alt="Visão Frontal do Exercício" style="display: none; width: 100%; height: 100%; object-fit: cover;">
+              <div class="motion-scanline" style="position: absolute; top:0; left:0; right:0; height:2px; background: rgba(37,99,235,0.7); box-shadow: 0 0 8px #2563EB; animation: scanLine 2s linear infinite;"></div>
+            </div>
+
+            <!-- Viewport Lateral -->
+            <div class="video-viewport" id="viewport-lateral" style="display: none;">
+              <span class="video-angle-watermark">ÂNGULO LATERAL (SIDE PROFILE 90°)</span>
+              <span class="video-actor-tag" id="actor-badge-lateral">Ator IA • Perfil Atlético</span>
+              <video id="video-player-lateral" playsinline autoplay loop muted style="width: 100%; height: 100%; object-fit: cover; display: block;"></video>
+              <img id="img-video-lateral" src="assets/images/hero-fitness.jpg" alt="Visão Lateral do Exercício" style="display: none; width: 100%; height: 100%; object-fit: cover;">
+              <div class="motion-scanline" style="position: absolute; top:0; left:0; right:0; height:2px; background: rgba(37,99,235,0.7); box-shadow: 0 0 8px #2563EB; animation: scanLine 2s linear infinite;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Rastreador de Fases Biomecânicas do Exercício -->
+        <div class="biomechanic-phase-tracker">
+          <div class="phase-step-badge active" id="phase-badge-1">
+            1. Fase Excêntrica (Descida Controlada)
+          </div>
+          <div class="phase-step-badge" id="phase-badge-2">
+            2. Ponto de Inflexão (Amplitude Segura)
+          </div>
+          <div class="phase-step-badge" id="phase-badge-3">
+            3. Fase Concêntrica (Subida & Contração)
+          </div>
+        </div>
+
+        <!-- Detalhes Técnicos e Erros Comuns -->
+        <div class="technical-guides-grid">
+          <div class="guide-column-box tips">
+            <h5>Como Executar Corretamente</h5>
+            <ul id="modal-cues-list">
+              <li>Pés alinhados na largura dos ombros com pontas a 15-30°.</li>
+              <li>Trave as escápulas e mantenha o peito aberto durante o movimento.</li>
+              <li>Empurre pelo calcanhar na subida.</li>
+            </ul>
+          </div>
+
+          <div class="guide-column-box mistakes">
+            <h5>Erros Comuns a Evitar</h5>
+            <ul id="modal-mistakes-list">
+              <li>Não deixe os joelhos fecharem para dentro (valgo dinâmico).</li>
+              <li>Evite tirar os calcanhares do solo na descida.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Widget Flutuante: Cronômetro de Descanso entre Séries -->
+  <div class="floating-rest-timer" id="floating-rest-timer">
+    <div class="timer-countdown-display">
+      <span class="timer-digits" id="timer-display">00:00</span>
+      <span class="timer-label">Descanso</span>
+    </div>
+    <div class="timer-preset-btns">
+      <button type="button" class="timer-chip-btn" data-time="30">30s</button>
+      <button type="button" class="timer-chip-btn" data-time="45">45s</button>
+      <button type="button" class="timer-chip-btn" data-time="60">60s</button>
+      <button type="button" class="timer-chip-btn" data-time="90">90s</button>
+      <button type="button" class="timer-chip-btn" data-time="120">2m</button>
+    </div>
+    <button type="button" id="btn-timer-reset" style="background: none; border: none; font-size: 1.1rem; cursor: pointer; color: var(--text-muted);" title="Zerar cronômetro">✕</button>
+  </div>
+
+  <!-- Footer Clean -->
+  <footer class="footer-clean">
+    <div class="container">
+      <div class="footer-copy">
+        <p>© 2026 J4 Fitness. Prescrição biomecânica baseada no Colégio Americano de Medicina do Esporte (ACSM).</p>
+        <div style="display: flex; gap: 16px;">
+          <a href="index.html" style="color: var(--primary); font-weight: 600;">Calculadora TMB</a>
+          <a href="cardapio.html" style="color: var(--primary); font-weight: 600;">Monte seu Cardápio</a>
+          <a href="treino.html" style="color: var(--primary); font-weight: 600;">Monte seu Treino</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="assets/js/treino.js"></script>
+</body>
+</html>

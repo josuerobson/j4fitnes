@@ -13,9 +13,19 @@
   </url>
   <url>
     <loc>https://j4fitnes.com.br/cardapio.html</loc>
-    <lastmod>2026-10-21</lastmod>
+    <lastmod>2026-10-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://j4fitnes.com.br/treino.html</loc>
+    <lastmod>2026-10-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.95</priority>
+    <image:image>
+      <image:loc>https://j4fitnes.com.br/assets/images/hero-treino.jpg</image:loc>
+      <image:title>Monte seu Treino Personalizado J4 Fitness</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://j4fitnes.com.br/blog/</loc>
